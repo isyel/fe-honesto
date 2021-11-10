@@ -9,18 +9,34 @@ type Props = {
   children: React.ReactNode
   loggedIn?: boolean
   className?: string
+  noPadding?: boolean
 }
 
-const MainLayout = ({ children, loggedIn, className }: Props) => (
-  <div
-    className={classnames(styles.mainLayout, className, {
-      [styles.loggedIn]: loggedIn,
-    })}
-  >
-    {loggedIn && <Header />}
-    <Content>{children}</Content>
-    <Footer />
-  </div>
-)
+const MainLayout = ({ children, loggedIn, className, noPadding }: Props) => {
+  const [darkTheme, setDarkTheme] = React.useState(false)
+
+  const handleThemeChange = () => {
+    setDarkTheme(!darkTheme)
+  }
+
+  return (
+    <div
+      className={classnames(
+        styles.mainLayout,
+        className,
+        {
+          [styles.loggedIn]: loggedIn,
+        },
+        darkTheme ? styles.darkTheme : styles.lightTheme,
+      )}
+    >
+      {loggedIn && (
+        <Header handleThemeChange={handleThemeChange} darkTheme={darkTheme} />
+      )}
+      <Content noPadding={noPadding}>{children}</Content>
+      <Footer />
+    </div>
+  )
+}
 
 export default MainLayout

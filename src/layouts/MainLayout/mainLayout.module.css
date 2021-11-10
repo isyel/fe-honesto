@@ -7,3 +7,35 @@
 .loggedIn {
   grid-template-rows: 75px 1fr 60px;
 }
+
+.lightTheme {
+  --lightGrey: #f2f3f4;
+  /* COLORS */
+  --white: #ffffff;
+  --black: #000000;
+  --accentColor: #201d29;
+  --borderColor: #d6d6d6;
+  --copyColor: #333333;
+  --copyDarkColor: var(--black);
+  --copyLightColor: var(--white);
+  --primaryColor: #ab61e5;
+  --primaryLightColor: #faf5ff;
+  --primaryMediumColor: #e7e2f8;
+  --baseBorder: 1px solid var(--borderColor);
+}
+
+.darkTheme {
+  --lightGrey: #131313;
+  /* COLORS */
+  --white: #000000;
+  --black: #ffffff;
+  --accentColor: #a596d1;
+  --borderColor: #4b4b4b;
+  --copyColor: #cecece;
+  --copyDarkColor: var(--black);
+  --copyLightColor: var(--white);
+  --primaryColor: #3b214e;
+  --primaryLightColor: #070707;
+  --primaryMediumColor: #151416;
+  --baseBorder: 1px solid var(--borderColor);
+}

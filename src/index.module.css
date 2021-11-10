@@ -1,17 +1,4 @@
 :root {
-  --lightGrey: #F2F3F4;
-  /* COLORS */
-  --white: #FFFFFF;
-  --black: #000000;
-  --accentColor: #201d29;
-  --borderColor: #D6D6D6;
-  --copyColor: #333333;
-  --copyDarkColor: var(--black);
-  --copyLightColor: var(--white);
-  --primaryColor: #AB61E5;
-  --primaryLightColor: #faf5ff;
-  --primaryMediumColor: #e7e2f8;
-
   /* TYPOGRAPHY */
   --font-family: sans-serif;
   --fs-base: 1rem;
@@ -33,8 +20,6 @@
 
   --baseHorzSpacing: 2rem;
   --baseVertSpacing: 3rem;
-
-  --baseBorder: 1px solid var(--borderColor);
 }
 
 * {
@@ -55,11 +40,20 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   margin: 0 0 0.45em;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: var(--copyDarkColor);
 }
 
