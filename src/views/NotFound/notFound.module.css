@@ -1,3 +1,20 @@
 .notFound {
+  border: var(--baseBorder);
+  padding: var(--baseHorzSpacing);
+  max-width: 600px;
+}
 
+.notFound__header {
+  font-size: var(--fs-sm);
+}
+
+.notFound__text {
+  font-size: var(--fs-xxl);
+  font-weight: var(--fw-bold);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
