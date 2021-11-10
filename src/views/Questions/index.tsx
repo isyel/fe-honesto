@@ -6,16 +6,19 @@ import { QuestionContext, QuestionT } from '../../context/QuestionProvider'
 import Question from '../../components/Question'
 import {
   DispatchFeedbackContext,
+  FeedbackContext,
   FeedbackT,
 } from '../../context/FeedbackProvider'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import User from '../../components/User'
 import {
   DispatchReviewerContext,
+  ReviewerContext,
   ReviewsT,
 } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
+import Button from '../../components/Button'
 
 const Questions = () => {
   const currentUser = React.useContext(AccountContext)
@@ -23,6 +26,14 @@ const Questions = () => {
   const questions = React.useContext(QuestionContext)
   const feedbackDispatch = React.useContext(DispatchFeedbackContext)
   const reviewDispatch = React.useContext(DispatchReviewerContext)
+  const feedbacks = React.useContext(FeedbackContext)
+  const reviews = React.useContext(ReviewerContext)
+  const [showAppreciation, setshowAppreciation] = React.useState(false)
+  const history = useHistory()
+
+  console.log('feedbacks: ', feedbacks)
+  console.log('reviews: ', reviews)
+
   const [currentQuestionIndex, setCurrentQuestionIndex] =
     React.useState<number>(0)
   const { userId } = useParams<{ userId: string }>()
@@ -90,38 +101,72 @@ const Questions = () => {
       action: 'review',
       payload: review,
     })
+    setshowAppreciation(true)
+  }
+
+  const goToUserFeedback = (userId: string) => {
+    history.push(`questions/${userId}`)
   }
 
   return (
     <MainLayout loggedIn>
-      <div className={styles.wrapper}>
-        <Link to="/share-feedback" className={styles.back}>
-          <ArrowBackIosIcon /> Back
-        </Link>
-        <section className={styles.textSection}>
-          <div>
-            {questions && <h2>{questions[currentQuestionIndex].label}</h2>}
-            <span>Share your feedback with {user?.name || 'No User'}</span>
-          </div>
-          <User avatarUrl={user?.avatarUrl} />
-        </section>
-        {questions.map((question, index) => {
-          return (
-            index === currentQuestionIndex && (
-              <Question
-                key={question.id}
-                question={question}
-                currentQuestionIndex={currentQuestionIndex}
-                questionsLength={questions.length}
-                handleAnswerChange={handleAnswerChange}
-                handleGoToNextQuestion={handleGoToNextQuestion}
-                saveAnswer={saveAnswer}
-                handleGoToPreviousQuestion={handleGoToPreviousQuestion}
-              />
+      {!showAppreciation ? (
+        <div className={styles.wrapper}>
+          <Link to="/share-feedback" className={styles.back}>
+            <ArrowBackIosIcon /> Back
+          </Link>
+          <section className={styles.textSection}>
+            <div>
+              {questions && <h2>{questions[currentQuestionIndex].label}</h2>}
+              <span>Share your feedback with {user?.name || 'No User'}</span>
+            </div>
+            <User avatarUrl={user?.avatarUrl} />
+          </section>
+          {questions.map((question, index) => {
+            return (
+              index === currentQuestionIndex && (
+                <Question
+                  key={question.id}
+                  question={question}
+                  currentQuestionIndex={currentQuestionIndex}
+                  questionsLength={questions.length}
+                  handleAnswerChange={handleAnswerChange}
+                  handleGoToNextQuestion={handleGoToNextQuestion}
+                  saveAnswer={saveAnswer}
+                  handleGoToPreviousQuestion={handleGoToPreviousQuestion}
+                />
+              )
             )
-          )
-        })}
-      </div>
+          })}
+        </div>
+      ) : (
+        <div>
+          <h1>Thank you for sharing your feedback</h1>
+          <p>Continue to give feedback to other members</p>
+          {users && users.length > 0 && (
+            <ul className={styles.users}>
+              {users
+                .filter(
+                  (user) =>
+                    user.id !== currentUser?.id &&
+                    !feedbacks.some(
+                      (feedback) => feedback.user?.id === user.id,
+                    ),
+                )
+                .map((user) => (
+                  <li key={user.id} className={styles.user}>
+                    <User name={user.name} avatarUrl={user.avatarUrl} />
+                    <span style={{ flex: 1 }} />
+                    <Button onClick={() => goToUserFeedback(user.id)}>
+                      Fill out
+                    </Button>
+                    <Link to="/components">Go to component</Link>
+                  </li>
+                ))}
+            </ul>
+          )}
+        </div>
+      )}
     </MainLayout>
   )
 }

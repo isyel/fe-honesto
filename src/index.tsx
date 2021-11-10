@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals'
 import UserProvider from './context/UserProvider'
 import QuestionProvider from './context/QuestionProvider'
 import AccountProvider from './context/AccountProvider'
+import ReviewerProvider from './context/ReviewerProvider'
+import FeedbackProvider from './context/FeedbackProvider'
 
 worker.start().then(() => {
   ReactDOM.render(
@@ -14,7 +16,11 @@ worker.start().then(() => {
       <AccountProvider>
         <UserProvider>
           <QuestionProvider>
-            <App />
+            <ReviewerProvider>
+              <FeedbackProvider>
+                <App />
+              </FeedbackProvider>
+            </ReviewerProvider>
           </QuestionProvider>
         </UserProvider>
       </AccountProvider>
