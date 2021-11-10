@@ -1,19 +1,20 @@
 import styles from './question.module.css'
 import * as React from 'react'
-import { Question2T, QuestionT } from '../../context/QuestionProvider'
+import { QuestionT } from '../../context/QuestionProvider'
 import Button from '../Button'
-import ScaleType from '../ScaleType'
 import TextType from '../TextType'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import FlagIcon from '@mui/icons-material/Flag'
+import MultiChoiceType from '../MultiChoiceType'
+import Scale from '../Scale'
 
 type Props = {
-  question?: Question2T | QuestionT
+  question?: QuestionT
   currentQuestionIndex: number
   questionsLength: number
   handleGoToNextQuestion: (se: React.SyntheticEvent) => void
   handleGoToPreviousQuestion: (se: React.SyntheticEvent) => void
-  handleAnswerChange: (se: React.SyntheticEvent) => void
+  handleAnswerChange: (se: React.SyntheticEvent | number) => void
 }
 
 const Question = (props: Props) => {
@@ -30,9 +31,17 @@ const Question = (props: Props) => {
   const showOptions = () => {
     switch (question?.type) {
       case 'scale':
-        return <ScaleType />
+        return (
+          <Scale
+            handleAnswerChange={handleAnswerChange}
+            scales={10}
+            value={0}
+          />
+        )
       case 'text':
         return <TextType handleAnswerChange={handleAnswerChange} />
+      case 'multipleChoice':
+        return <MultiChoiceType />
 
       default:
         return null
@@ -41,13 +50,7 @@ const Question = (props: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.question}>
-        {question?.type === 'scale' || question?.type === 'text' ? (
-          showOptions()
-        ) : (
-          <div>Multichoice</div>
-        )}
-      </div>
+      <div className={styles.question}>{showOptions()}</div>
       <div className={styles.buttons}>
         <Button secondary onClick={handleGoToPreviousQuestion}>
           Previous

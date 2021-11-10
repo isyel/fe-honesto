@@ -1,5 +1,6 @@
 .scales {
   display: flex;
+  gap: 0.2rem;
 }
 
 .scales > * {
@@ -7,5 +8,16 @@
 }
 
 .scale {
-  height: 25px;
+  height: 50px;
+  background-color: var(--lightGrey);
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.hovered {
+  background-color: var(--primaryMediumColor);
+}
+
+.selected {
+  background-color: var(--primaryColor);
 }

@@ -2,11 +2,11 @@ import * as React from 'react'
 import styles from './texttype.module.css'
 
 type Props = {
-  field?: string
+  value?: string
   handleAnswerChange: (se: React.SyntheticEvent) => void
 }
 
-const TextType = ({ handleAnswerChange, field }: Props) => {
+const TextType = ({ handleAnswerChange, value }: Props) => {
   const handleTextChange = (e: {
     target: { value: React.SyntheticEvent<Element, Event> }
   }) => {
@@ -19,7 +19,7 @@ const TextType = ({ handleAnswerChange, field }: Props) => {
         rows={8}
         className={styles.textArea}
         onChange={handleAnswerChange}
-        value={field}
+        value={value}
         placeholder="Say something"
       ></textarea>
     </div>
