@@ -92,12 +92,10 @@ const Questions = () => {
     })
   }
 
-  const goBack = () => {}
-
   return (
     <MainLayout loggedIn>
       <div className={styles.wrapper}>
-        <Link to="/share-feedback" className={styles.back} onClick={goBack}>
+        <Link to="/share-feedback" className={styles.back}>
           <ArrowBackIosIcon /> Back
         </Link>
         <section className={styles.textSection}>
@@ -107,10 +105,11 @@ const Questions = () => {
           </div>
           <User avatarUrl={user?.avatarUrl} />
         </section>
-        {questions.map((question, index) => (
-          <>
-            {index === currentQuestionIndex && (
+        {questions.map((question, index) => {
+          return (
+            index === currentQuestionIndex && (
               <Question
+                key={question.id}
                 question={question}
                 currentQuestionIndex={currentQuestionIndex}
                 questionsLength={questions.length}
@@ -119,9 +118,9 @@ const Questions = () => {
                 saveAnswer={saveAnswer}
                 handleGoToPreviousQuestion={handleGoToPreviousQuestion}
               />
-            )}
-          </>
-        ))}
+            )
+          )
+        })}
       </div>
     </MainLayout>
   )
