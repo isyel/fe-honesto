@@ -22,7 +22,7 @@ const Home = () => {
   }
 
   return (
-    <MainLayout className={styles.background}>
+    <MainLayout className={styles.background} noPadding={true}>
       <div className={styles.wrapper}>
         <div className={styles.loginBox}>
           <img

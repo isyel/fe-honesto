@@ -5,8 +5,14 @@ import {
   AccountContext,
   DispatchAccountContext,
 } from '../../context/AccountProvider'
+import Button from '../../components/Button'
 
-const Header = () => {
+type Props = {
+  handleThemeChange: (se: React.SyntheticEvent) => void
+  darkTheme: boolean
+}
+
+const Header = ({ handleThemeChange }: Props) => {
   const currentUser = React.useContext(AccountContext)
   const logoutUser = React.useContext(DispatchAccountContext)
 
@@ -25,6 +31,7 @@ const Header = () => {
       <NavLink exact to="/my-feedback" activeClassName={styles.active}>
         My Feedback
       </NavLink>
+      <Button onClick={handleThemeChange}>Switch Theme</Button>
       <span className={styles.spacer} />
       <NavLink exact to="/" onClick={handleLogout}>
         Logout {currentUser && `${currentUser.name}`}

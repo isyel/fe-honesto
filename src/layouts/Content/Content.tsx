@@ -4,10 +4,13 @@ import classnames from 'classnames'
 
 type Props = {
   children: React.ReactNode
+  noPadding?: boolean
 }
 
-const Content = ({ children }: Props) => (
-  <div className={classnames(styles.content)}>{children}</div>
+const Content = ({ children, noPadding }: Props) => (
+  <div className={classnames(noPadding ? styles.noPadding : styles.content)}>
+    {children}
+  </div>
 )
 
 export default Content
