@@ -19,17 +19,14 @@ type DispatchQuestionContextT = any
 
 export const DispatchQuestionContext =
   React.createContext<DispatchQuestionContextT | null>(null)
-export const QuestionContext = React.createContext<QuestionT[] | null>(null)
+export const QuestionContext = React.createContext<QuestionT[]>([])
 
 type SetQuestionsT = {
   action: 'set'
   payload: Array<QuestionT | Question2T>
 }
 
-const reducer = (
-  state: QuestionT[] | null,
-  update: SetQuestionsT,
-): QuestionT[] | null => {
+const reducer = (state: QuestionT[], update: SetQuestionsT): QuestionT[] => {
   if (update.action === 'set') {
     return update.payload
   }

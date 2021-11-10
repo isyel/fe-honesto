@@ -4,17 +4,26 @@ import MainLayout from '../../layouts/MainLayout'
 import styles from './questions.module.css'
 import { QuestionContext } from '../../context/QuestionProvider'
 import Question from '../../components/Question'
+import { FeedbackT } from '../../context/FeedbackProvider'
+import { Link, useParams } from 'react-router-dom'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import User from '../../components/User'
 
 const Questions = () => {
   const users = React.useContext(UserContext)
   const questions = React.useContext(QuestionContext)
   const [currentQuestionIndex, setCurrentQuestionIndex] =
     React.useState<number>(0)
-  const user = users?.find((user) => user.id === '1')
+  const { userId } = useParams<{ userId: string }>()
+  const user = users?.find((user) => user.id === userId)
   const [answers, setAnswers] = React.useState([])
 
   const handleGoToNextQuestion = () => {
-    setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1)
+    setCurrentQuestionIndex((currentQuestionIndex) =>
+      currentQuestionIndex + 1 < questions?.length
+        ? currentQuestionIndex + 1
+        : currentQuestionIndex,
+    )
   }
 
   const handleGoToPreviousQuestion = () => {
@@ -25,20 +34,31 @@ const Questions = () => {
     )
   }
 
-  const saveAnswer = (_event: any, answer: string | number) => {}
+  const handleAnswerChange = (answer: any) => {}
 
-  console.log(questions)
+  const saveAnswer = (answer: FeedbackT) => {}
+
+  const goBack = () => {}
 
   return (
     <MainLayout loggedIn>
       <div className={styles.wrapper}>
-        {/* Back button */}
-        <h1>Share Feedback</h1>
-        <span>Share your feedback with {user?.name || 'No User'}</span>
+        <Link to="/share-feedback" className={styles.back} onClick={goBack}>
+          <ArrowBackIosIcon /> Back
+        </Link>
+        <section className={styles.textSection}>
+          <div>
+            {questions && <h2>{questions[currentQuestionIndex].label}</h2>}
+            <span>Share your feedback with {user?.name || 'No User'}</span>
+          </div>
+          <User avatarUrl={user?.avatarUrl} />
+        </section>
         {questions && (
           <Question
             question={questions[currentQuestionIndex]}
-            saveAnswer={saveAnswer}
+            currentQuestionIndex={currentQuestionIndex}
+            questionsLength={questions.length}
+            handleAnswerChange={handleAnswerChange}
             handleGoToNextQuestion={handleGoToNextQuestion}
             handleGoToPreviousQuestion={handleGoToPreviousQuestion}
           />

@@ -1,0 +1,7 @@
+.textArea {
+  width: 100%;
+  background-color: var(--white);
+  border: var(--baseBorder);
+  border-radius: var(--borderRadius);
+  padding: var(--space);
+}

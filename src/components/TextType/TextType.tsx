@@ -16,10 +16,11 @@ const TextType = ({ handleAnswerChange, field }: Props) => {
   return (
     <div className={styles.textType}>
       <textarea
-        cols={4}
+        rows={8}
         className={styles.textArea}
         onChange={handleAnswerChange}
         value={field}
+        placeholder="Say something"
       ></textarea>
     </div>
   )

@@ -1,26 +1,53 @@
 import styles from './question.module.css'
 import * as React from 'react'
-import { QuestionT } from '../../context/QuestionProvider'
+import { Question2T, QuestionT } from '../../context/QuestionProvider'
 import Button from '../Button'
+import ScaleType from '../ScaleType'
+import TextType from '../TextType'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import FlagIcon from '@mui/icons-material/Flag'
 
 type Props = {
-  question?: QuestionT
+  question?: Question2T | QuestionT
+  currentQuestionIndex: number
+  questionsLength: number
   handleGoToNextQuestion: (se: React.SyntheticEvent) => void
   handleGoToPreviousQuestion: (se: React.SyntheticEvent) => void
-  saveAnswer: (se: React.SyntheticEvent, answer: number | string) => void
+  handleAnswerChange: (se: React.SyntheticEvent) => void
 }
 
 const Question = (props: Props) => {
   const {
     question,
+    currentQuestionIndex,
+    questionsLength,
     handleGoToNextQuestion,
     handleGoToPreviousQuestion,
-    saveAnswer,
+    handleAnswerChange,
   } = props
   const [selectedAnswer, setSelectedAnswer] = React.useState(null)
+
+  const showOptions = () => {
+    switch (question?.type) {
+      case 'scale':
+        return <ScaleType />
+      case 'text':
+        return <TextType handleAnswerChange={handleAnswerChange} />
+
+      default:
+        return null
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.question}></div>
+      <div className={styles.question}>
+        {question?.type === 'scale' || question?.type === 'text' ? (
+          showOptions()
+        ) : (
+          <div>Multichoice</div>
+        )}
+      </div>
       <div className={styles.buttons}>
         <Button secondary onClick={handleGoToPreviousQuestion}>
           Previous
@@ -30,7 +57,7 @@ const Question = (props: Props) => {
         </Button>
         <Button
           secondary={!selectedAnswer}
-          onClick={saveAnswer}
+          onClick={handleAnswerChange}
           disabled={!selectedAnswer}
         >
           Next
@@ -41,9 +68,16 @@ const Question = (props: Props) => {
         <div className={styles.questionStatus}>
           <span className={styles.questionCompleted}>QUESTIONS COMPLETED</span>
           <br />
-          <span className={styles.questionNumber}>1/10</span>
+          <span className={styles.questionNumber}>
+            {currentQuestionIndex + 1}/{questionsLength}
+          </span>
         </div>
-        <div className={styles.rating}></div>
+        <div className={styles.rating}>
+          {[...Array(5)].map((e) => (
+            <StarBorderIcon />
+          ))}
+          <FlagIcon />
+        </div>
       </div>
     </div>
   )
