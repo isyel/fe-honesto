@@ -11,6 +11,7 @@ import NotFound from '../views/NotFound'
 import ReviewFeedback from '../views/ReviewFeedback'
 import { AccountContext } from '../context/AccountProvider'
 import PrivateRoute from '../components/Routing/PrivateRoute'
+import Questions from '../views/Questions'
 
 const App = () => {
   const currentUser = React.useContext(AccountContext)
@@ -50,6 +51,9 @@ const App = () => {
           </PrivateRoute>
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/components">
             <Components />
+          </PrivateRoute>
+          <PrivateRoute isLoggedIn={isLoggedIn} exact path="/questions/:userId">
+            <Questions />
           </PrivateRoute>
           <Route>
             <NotFound />
