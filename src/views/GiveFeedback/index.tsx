@@ -4,9 +4,15 @@ import MainLayout from '../../layouts/MainLayout'
 import User from '../../components/User'
 import Button from '../../components/Button'
 import styles from './giveFeedback.module.css'
+import { Link, useHistory } from 'react-router-dom'
 
 const GiveFeedback = () => {
   const users = React.useContext(UserContext)
+  const history = useHistory()
+
+  const goToUserFeedback = (userId: string) => {
+    history.push(`questions/${userId}`)
+  }
 
   return (
     <MainLayout loggedIn>
@@ -18,13 +24,10 @@ const GiveFeedback = () => {
               <li key={user.id} className={styles.user}>
                 <User name={user.name} avatarUrl={user.avatarUrl} />
                 <span style={{ flex: 1 }} />
-                <Button
-                  onClick={() => {
-                    console.log('Fill out', user)
-                  }}
-                >
+                <Button onClick={() => goToUserFeedback(user.id)}>
                   Fill out
                 </Button>
+                <Link to="/components">Go to component</Link>
               </li>
             ))}
           </ul>
