@@ -7,9 +7,7 @@ type Props = {
 }
 
 const TextType = ({ handleAnswerChange, value }: Props) => {
-  const handleTextChange = (e: {
-    target: { value: React.SyntheticEvent<Element, Event> }
-  }) => {
+  const handleTextChange = (e: any) => {
     handleAnswerChange(e.target.value)
   }
 
@@ -18,7 +16,7 @@ const TextType = ({ handleAnswerChange, value }: Props) => {
       <textarea
         rows={8}
         className={styles.textArea}
-        onChange={handleAnswerChange}
+        onChange={handleTextChange}
         value={value}
         placeholder="Say something"
       ></textarea>

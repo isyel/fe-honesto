@@ -41,7 +41,13 @@ const Question = (props: Props) => {
       case 'text':
         return <TextType handleAnswerChange={handleAnswerChange} />
       case 'multipleChoice':
-        return <MultiChoiceType />
+        return (
+          <MultiChoiceType
+            handleAnswerChange={handleAnswerChange}
+            options={question.options}
+            value={null}
+          />
+        )
 
       default:
         return null
@@ -77,7 +83,7 @@ const Question = (props: Props) => {
         </div>
         <div className={styles.rating}>
           {[...Array(5)].map((e) => (
-            <StarBorderIcon />
+            <StarBorderIcon key={e} />
           ))}
           <FlagIcon />
         </div>

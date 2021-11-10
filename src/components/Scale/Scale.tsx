@@ -32,6 +32,7 @@ const Scale = ({ handleAnswerChange, value, scales }: Props) => {
           onMouseEnter={() => handleHoverScale(index)}
           onMouseLeave={() => handleHoverScale(-1)}
           onClick={() => handleSelectScale(index)}
+          key={index}
         ></div>
       ))}
     </div>

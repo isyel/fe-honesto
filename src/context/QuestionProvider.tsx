@@ -1,14 +1,16 @@
 import * as React from 'react'
 
+export type OptionsT = {
+  label: string
+  value: number
+}
+
 export type QuestionT = {
   id: string
   type: 'scale' | 'text' | 'multipleChoice'
   required: boolean
   label: string
-  options?: {
-    label: string
-    value: number
-  }[]
+  options?: OptionsT[]
 }
 
 type DispatchQuestionContextT = any
