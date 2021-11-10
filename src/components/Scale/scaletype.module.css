@@ -1,0 +1,11 @@
+.scales {
+  display: flex;
+}
+
+.scales > * {
+  flex: 1 1 100%;
+}
+
+.scale {
+  height: 25px;
+}
