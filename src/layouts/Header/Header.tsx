@@ -5,7 +5,6 @@ import {
   AccountContext,
   DispatchAccountContext,
 } from '../../context/AccountProvider'
-import Button from '../../components/Button'
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
 

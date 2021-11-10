@@ -3,12 +3,12 @@ import styles from './texttype.module.css'
 
 type Props = {
   value?: string
-  handleAnswerChange: (se: React.SyntheticEvent) => void
+  handleAddChangeAnswer: (answer: string) => void
 }
 
-const TextType = ({ handleAnswerChange, value }: Props) => {
+const TextType = ({ handleAddChangeAnswer, value }: Props) => {
   const handleTextChange = (e: any) => {
-    handleAnswerChange(e.target.value)
+    handleAddChangeAnswer(e.target.value)
   }
 
   return (

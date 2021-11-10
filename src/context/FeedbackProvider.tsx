@@ -3,13 +3,11 @@ import { QuestionT } from './QuestionProvider'
 import { UserT } from './types'
 
 export type FeedbackT = {
-  user: UserT
-  feedback: [
-    {
-      question: QuestionT
-      feedback: string | number
-    },
-  ]
+  user: UserT | undefined
+  feedback: {
+    question: QuestionT
+    feedback: string | number
+  }[]
 }
 
 type DispatchFeedbackContextT = any

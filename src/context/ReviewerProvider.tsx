@@ -1,10 +1,14 @@
 import * as React from 'react'
-import { FeedbackT } from './FeedbackProvider'
+import { QuestionT } from './QuestionProvider'
 import { UserT } from './types'
 
 export type ReviewsT = {
-  user: UserT
-  feedbacks: FeedbackT[]
+  reviewer: UserT | null
+  user: UserT | undefined
+  feedbacks: {
+    question: QuestionT
+    feedback: string | number
+  }[]
 }
 
 type DispatchReviewerContextT = any
@@ -14,15 +18,15 @@ export const DispatchReviewerContext =
 export const ReviewerContext = React.createContext<ReviewsT[]>([])
 
 type SetReviewsT = {
-  action: 'reviewer'
+  action: 'review'
   payload: ReviewsT
 }
 
 const reducer = (state: ReviewsT[], update: SetReviewsT): ReviewsT[] => {
-  if (update.action === 'reviewer') {
-    return state.find((reviews) => reviews.user.id === update.payload.user.id)
+  if (update.action === 'review') {
+    return state.find((reviews) => reviews.user?.id === update.payload.user?.id)
       ? state.map((reviews) =>
-          reviews.user.id === update.payload.user.id
+          reviews.user?.id === update.payload.user?.id
             ? {
                 ...reviews,
                 feedbacks: [...reviews.feedbacks, ...update.payload.feedbacks],

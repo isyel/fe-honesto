@@ -12,9 +12,13 @@ type Props = {
   question?: QuestionT
   currentQuestionIndex: number
   questionsLength: number
+  saveAnswer: () => void
   handleGoToNextQuestion: (se: React.SyntheticEvent) => void
   handleGoToPreviousQuestion: (se: React.SyntheticEvent) => void
-  handleAnswerChange: (se: React.SyntheticEvent | number) => void
+  handleAnswerChange: (
+    question: QuestionT | undefined | React.SyntheticEvent,
+    answer: any,
+  ) => void
 }
 
 const Question = (props: Props) => {
@@ -26,26 +30,35 @@ const Question = (props: Props) => {
     handleGoToPreviousQuestion,
     handleAnswerChange,
   } = props
-  const [selectedAnswer, setSelectedAnswer] = React.useState(null)
+  const [selectedAnswer, setSelectedAnswer] = React.useState()
+
+  const handleAddChangeAnswer = (answer: any) => {
+    setSelectedAnswer(answer)
+  }
 
   const showOptions = () => {
     switch (question?.type) {
       case 'scale':
         return (
           <Scale
-            handleAnswerChange={handleAnswerChange}
+            handleAddChangeAnswer={handleAddChangeAnswer}
             scales={10}
-            value={0}
+            value={selectedAnswer || -1}
           />
         )
       case 'text':
-        return <TextType handleAnswerChange={handleAnswerChange} />
+        return (
+          <TextType
+            handleAddChangeAnswer={handleAddChangeAnswer}
+            value={selectedAnswer}
+          />
+        )
       case 'multipleChoice':
         return (
           <MultiChoiceType
-            handleAnswerChange={handleAnswerChange}
+            handleAddChangeAnswer={handleAddChangeAnswer}
             options={question.options}
-            value={null}
+            value={selectedAnswer || null}
           />
         )
 
@@ -66,7 +79,7 @@ const Question = (props: Props) => {
         </Button>
         <Button
           secondary={!selectedAnswer}
-          onClick={handleAnswerChange}
+          onClick={() => handleAnswerChange(question, selectedAnswer)}
           disabled={!selectedAnswer}
         >
           Next

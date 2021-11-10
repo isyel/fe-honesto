@@ -5,15 +5,14 @@ import styles from './scaletype.module.css'
 type Props = {
   value: number
   scales?: number
-  handleAnswerChange: (value: number) => void
+  handleAddChangeAnswer: (answer: any) => void
 }
 
-const Scale = ({ handleAnswerChange, value, scales }: Props) => {
-  const [scaleSelected, setScaleSelected] = React.useState(value || -1)
+const Scale = ({ handleAddChangeAnswer, value, scales }: Props) => {
   const [scaleHovered, setScaleHovered] = React.useState(value || -1)
 
   const handleSelectScale = (value: number) => {
-    setScaleSelected(value)
+    handleAddChangeAnswer(value)
   }
 
   const handleHoverScale = (value: number) => {
@@ -26,7 +25,7 @@ const Scale = ({ handleAnswerChange, value, scales }: Props) => {
         <div
           className={classNames(
             styles.scale,
-            scaleSelected >= index && styles.selected,
+            value >= index && styles.selected,
             scaleHovered >= index && styles.hovered,
           )}
           onMouseEnter={() => handleHoverScale(index)}
