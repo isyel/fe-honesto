@@ -2,14 +2,14 @@ import * as React from 'react'
 import styles from './user.module.css'
 
 type Props = {
-  name: string
+  name?: string
   avatarUrl?: string
 }
 
 const User = (props: Props) => {
   const { name, avatarUrl } = props
   const initials = name
-    .split(' ')
+    ?.split(' ')
     .map((word) => word[0])
     .join('')
 

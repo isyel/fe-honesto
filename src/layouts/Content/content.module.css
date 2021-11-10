@@ -1,3 +1,7 @@
 .content {
   padding: var(--baseVertSpacing) var(--baseHorzSpacing);
 }
+
+.noPadding {
+  padding: 0;
+}
