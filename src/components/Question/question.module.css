@@ -1,0 +1,28 @@
+.wrapper {
+  padding: var(--baseHorzSpacing);
+  border: var(--baseBorder);
+  display: flex;
+  flex-direction: column;
+  gap: var(--baseHorzSpacing);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.questionCompleted {
+  font-weight: var(--fw-semibold);
+}
