@@ -25,17 +25,17 @@
 }
 
 .darkTheme {
-  --lightGrey: #131313;
+  --lightGrey: #a4a5a5;
   /* COLORS */
   --white: #000000;
   --black: #ffffff;
-  --accentColor: #a596d1;
-  --borderColor: #4b4b4b;
-  --copyColor: #cecece;
+  --accentColor: #17161a;
+  --borderColor: #383838;
+  --copyColor: #1b1a1a;
   --copyDarkColor: var(--black);
   --copyLightColor: var(--white);
-  --primaryColor: #3b214e;
-  --primaryLightColor: #070707;
-  --primaryMediumColor: #151416;
+  --primaryColor: #69239b;
+  --primaryLightColor: #4b4a4a;
+  --primaryMediumColor: #5e5963;
   --baseBorder: 1px solid var(--borderColor);
 }

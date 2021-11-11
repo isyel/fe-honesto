@@ -55,6 +55,13 @@ const App = () => {
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/questions/:userId">
             <Questions />
           </PrivateRoute>
+          <PrivateRoute
+            isLoggedIn={isLoggedIn}
+            exact
+            path="/submission/:userId"
+          >
+            Reviews page
+          </PrivateRoute>
           <Route>
             <NotFound />
           </Route>

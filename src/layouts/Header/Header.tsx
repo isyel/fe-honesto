@@ -7,6 +7,7 @@ import {
 } from '../../context/AccountProvider'
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
+import { DispatchFeedbackContext } from '../../context/FeedbackProvider'
 
 type Props = {
   handleThemeChange: (se: React.SyntheticEvent) => void
@@ -16,11 +17,13 @@ type Props = {
 const Header = ({ handleThemeChange, darkTheme }: Props) => {
   const currentUser = React.useContext(AccountContext)
   const logoutUser = React.useContext(DispatchAccountContext)
+  const feedbackDispatch = React.useContext(DispatchFeedbackContext)
 
   console.log('current user', currentUser)
 
   const handleLogout = () => {
     logoutUser({ action: 'logout' })
+    feedbackDispatch({ action: 'logout', payload: [] })
   }
 
   return (
@@ -31,6 +34,9 @@ const Header = ({ handleThemeChange, darkTheme }: Props) => {
       </NavLink>
       <NavLink exact to="/my-feedback" activeClassName={styles.active}>
         My Feedback
+      </NavLink>
+      <NavLink exact to="/submission" activeClassName={styles.active}>
+        Reviews
       </NavLink>
       {darkTheme ? (
         <ToggleOffIcon

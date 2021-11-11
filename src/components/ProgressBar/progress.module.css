@@ -1,0 +1,18 @@
+.scales {
+  display: flex;
+}
+
+.scales > * {
+  flex: 1 1 100%;
+}
+
+.scale {
+  height: 2px;
+  background-color: var(--lightGrey);
+  cursor: pointer;
+  transition: ease-in-out 0.7s;
+}
+
+.selected {
+  background-color: var(--primaryColor);
+}

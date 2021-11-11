@@ -7,6 +7,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder'
 import FlagIcon from '@mui/icons-material/Flag'
 import MultiChoiceType from '../MultiChoiceType'
 import Scale from '../Scale'
+import ProgressBar from '../ProgressBar'
 
 type Props = {
   question?: QuestionT
@@ -82,10 +83,10 @@ const Question = (props: Props) => {
           onClick={() => handleAnswerChange(question, selectedAnswer)}
           disabled={!selectedAnswer}
         >
-          Next
+          {currentQuestionIndex + 1 === questionsLength ? 'Submit' : 'Next'}
         </Button>
       </div>
-      <hr />
+      <ProgressBar scales={questionsLength} value={currentQuestionIndex - 1} />
       <div className={styles.footer}>
         <div className={styles.questionStatus}>
           <span className={styles.questionCompleted}>QUESTIONS COMPLETED</span>
