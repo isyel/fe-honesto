@@ -12,6 +12,7 @@ import ReviewFeedback from '../views/ReviewFeedback'
 import { AccountContext } from '../context/AccountProvider'
 import PrivateRoute from '../components/Routing/PrivateRoute'
 import Questions from '../views/Questions'
+import Submissions from '../views/Submissions'
 
 const App = () => {
   const currentUser = React.useContext(AccountContext)
@@ -55,12 +56,8 @@ const App = () => {
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/questions/:userId">
             <Questions />
           </PrivateRoute>
-          <PrivateRoute
-            isLoggedIn={isLoggedIn}
-            exact
-            path="/submission/:userId"
-          >
-            Reviews page
+          <PrivateRoute isLoggedIn={isLoggedIn} exact path="/submissions">
+            <Submissions />
           </PrivateRoute>
           <Route>
             <NotFound />

@@ -35,7 +35,7 @@ const Header = ({ handleThemeChange, darkTheme }: Props) => {
       <NavLink exact to="/my-feedback" activeClassName={styles.active}>
         My Feedback
       </NavLink>
-      <NavLink exact to="/submission" activeClassName={styles.active}>
+      <NavLink exact to="/submissions" activeClassName={styles.active}>
         Reviews
       </NavLink>
       {darkTheme ? (
