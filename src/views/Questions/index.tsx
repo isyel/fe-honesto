@@ -165,7 +165,6 @@ const Questions = () => {
                     <Button onClick={() => goToUserFeedback(user.id)}>
                       Fill out
                     </Button>
-                    <Link to="/components">Go to component</Link>
                   </li>
                 ))}
             </ul>

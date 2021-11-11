@@ -6,30 +6,32 @@ import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
 import classNames from 'classnames'
 import styles from './reviewFeedback.module.css'
+import { UserContext } from '../../context/UserProvider'
 
 const ReviewFeedback = () => {
   const feedbacks = React.useContext(FeedbackContext)
+  const users = React.useContext(UserContext)
+  const search = window.location.search
+  const params = new URLSearchParams(search)
+  const userId = params.get('user')
+  const user = users?.find((user: UserT) => user.id === userId)
+  const userFeedback = feedbacks.find(
+    (feedback) => feedback.user?.id === userId,
+  )
+
   const [selectedUser, setSelectedUser] = React.useState<UserT | undefined>(
-    feedbacks[0]?.user,
+    user || feedbacks[0]?.user,
   )
   const [selectedFeedback, setSelectedFeedback] = React.useState<
     FeedbackT | undefined
-  >(feedbacks[0])
+  >(userFeedback || feedbacks[0])
 
   const handleSelectUser = (user: UserT) => {
     setSelectedUser(user)
     setSelectedFeedback(
-      feedbacks.find((feedback) => {
-        console.log('feedback.user?.id: ', feedback.user?.id)
-        console.log('user.id: ', user.id)
-
-        return feedback.user?.id === user.id
-      }),
+      feedbacks.find((feedback) => feedback.user?.id === user.id),
     )
   }
-
-  console.log('selectedFeedback: ', selectedFeedback)
-  console.log('feedbacks: ', feedbacks)
 
   return (
     <MainLayout loggedIn>
