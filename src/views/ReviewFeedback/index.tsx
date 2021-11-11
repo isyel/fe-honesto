@@ -4,6 +4,7 @@ import User from '../../components/User'
 import { FeedbackContext, FeedbackT } from '../../context/FeedbackProvider'
 import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
+import classNames from 'classnames'
 import styles from './reviewFeedback.module.css'
 
 const ReviewFeedback = () => {
@@ -32,32 +33,47 @@ const ReviewFeedback = () => {
 
   return (
     <MainLayout loggedIn>
-      <h1>Review Feedback Given</h1>
+      {feedbacks?.length > 0 ? (
+        <>
+          <h1>Review Feedback Given</h1>
+          <div className={styles.feedbackContainer}>
+            <ul className={styles.users}>
+              <li>
+                <h3>Feedback given</h3>
+              </li>
+              {feedbacks.map((feedback) => (
+                <li
+                  className={classNames(
+                    styles.user,
+                    selectedUser?.id === feedback.user?.id && styles.selected,
+                  )}
+                >
+                  <User
+                    id={feedback.user?.id}
+                    name={feedback.user?.name}
+                    avatarUrl={feedback.user?.avatarUrl}
+                    handleOnClick={handleSelectUser}
+                  />
+                </li>
+              ))}
+            </ul>
 
-      <div className={styles.feedbackContainer}>
-        <ul className={styles.users}>
-          <li>
-            <h3>Feedback given</h3>
-          </li>
-          {feedbacks.map((feedback) => (
-            <li>
-              <User
-                id={feedback.user?.id}
-                name={feedback.user?.name}
-                avatarUrl={feedback.user?.avatarUrl}
-                handleOnClick={handleSelectUser}
-              />
-            </li>
-          ))}
-        </ul>
-
-        <ul className={styles.feedback}>
-          <li>
-            <h2>{selectedUser?.name}</h2>
-          </li>
-          <FeedbackList feedbacks={selectedFeedback?.feedback} />
-        </ul>
-      </div>
+            <ul className={styles.feedback}>
+              <li>
+                <h2>{selectedUser?.name}'s Feedback</h2>
+              </li>
+              <FeedbackList feedbacks={selectedFeedback?.feedback} />
+            </ul>
+          </div>
+        </>
+      ) : (
+        <div className={styles.noFeedback}>
+          <h1>No feedback to display 😔</h1>
+          <p>
+            There is no feedback to display at this time - check back in a bit!
+          </p>
+        </div>
+      )}
     </MainLayout>
   )
 }
