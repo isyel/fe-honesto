@@ -8,6 +8,7 @@ import FlagIcon from '@mui/icons-material/Flag'
 import MultiChoiceType from '../MultiChoiceType'
 import Scale from '../Scale'
 import ProgressBar from '../ProgressBar'
+import Tooltip from '@mui/material/Tooltip'
 
 type Props = {
   question?: QuestionT
@@ -99,7 +100,14 @@ const Question = (props: Props) => {
           {[...Array(5)].map((e) => (
             <StarBorderIcon key={e} />
           ))}
-          <FlagIcon />
+
+          <Tooltip
+            title="I have feedback about this question please ask me about it"
+            arrow
+            placement="top"
+          >
+            <FlagIcon />
+          </Tooltip>
         </div>
       </div>
     </div>
