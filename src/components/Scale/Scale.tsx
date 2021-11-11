@@ -1,7 +1,7 @@
 import * as React from 'react'
 import classNames from 'classnames'
 import Tooltip from '@mui/material/Tooltip'
-import styles from './scaletype.module.css'
+import styles from './scale.module.css'
 
 type Props = {
   value: number | string

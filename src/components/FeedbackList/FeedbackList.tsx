@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FeedbackItemT } from '../../context/FeedbackProvider'
 import FeedbackItem from '../FeedbackItem'
-import styles from './feedbacklist.module.css'
+import styles from './feedBackList.module.css'
 
 type Props = {
   feedbacks?: FeedbackItemT[]

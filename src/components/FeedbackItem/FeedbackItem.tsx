@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FeedbackItemT } from '../../context/FeedbackProvider'
 import Scale from '../Scale'
-import styles from './feedbackitem.module.css'
+import styles from './feedBackItem.module.css'
 
 type Props = {
   feedbackItem?: FeedbackItemT

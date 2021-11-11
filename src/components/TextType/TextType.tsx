@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './texttype.module.css'
+import styles from './textType.module.css'
 
 type Props = {
   value?: string

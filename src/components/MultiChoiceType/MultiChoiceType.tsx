@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { OptionsT } from '../../context/QuestionProvider'
 import classNames from 'classnames'
-import styles from './multichoicetype.module.css'
+import styles from './multiChoiceType.module.css'
 
 type Props = {
   value: number | string | null
