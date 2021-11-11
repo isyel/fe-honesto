@@ -7,6 +7,7 @@ import Question from '../../components/Question'
 import {
   DispatchFeedbackContext,
   FeedbackContext,
+  FeedbackItemT,
   FeedbackT,
 } from '../../context/FeedbackProvider'
 import { Link, useHistory, useParams } from 'react-router-dom'
@@ -14,7 +15,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import User from '../../components/User'
 import {
   DispatchReviewerContext,
-  ReviewsT,
+  ReviewItemPayloadT,
 } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
 import Button from '../../components/Button'
@@ -84,17 +85,17 @@ const Questions = () => {
 
   console.log('answers: ', answers)
 
-  const saveAnswer = (
-    updatedAnswers: { question: any; feedback: any; skipped: boolean }[],
-  ) => {
+  const saveAnswer = (updatedAnswers: FeedbackItemT[]) => {
     const feedback: FeedbackT = {
       user: user,
       feedback: updatedAnswers,
     }
-    const review: ReviewsT = {
-      reviewer: currentUser,
+    const review: ReviewItemPayloadT = {
       user: feedback.user,
-      feedbacks: feedback.feedback,
+      feedbacks: {
+        reviewer: currentUser,
+        feedbacks: feedback.feedback,
+      },
     }
     feedbackDispatch({
       action: 'feedback',

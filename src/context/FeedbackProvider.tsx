@@ -3,7 +3,7 @@ import { QuestionT } from './QuestionProvider'
 import { UserT } from './types'
 
 export type FeedbackT = {
-  user: UserT | undefined
+  user: UserT | undefined | null
   feedback: FeedbackItemT[]
 }
 

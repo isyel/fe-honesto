@@ -28,10 +28,14 @@ const Scale = ({
     setScaleHovered(value)
   }
 
-  console.log('toolTipText: ', toolTipText)
-
   return (
-    <Tooltip title={toolTipText || ''} arrow placement="top">
+    <Tooltip
+      title={toolTipText || ''}
+      arrow
+      placement={'bottom'}
+      enterDelay={500}
+      leaveDelay={200}
+    >
       <div className={styles.scales}>
         <>
           {[...Array(scales)].map((scale, index) => (

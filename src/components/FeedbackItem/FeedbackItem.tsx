@@ -18,6 +18,10 @@ const FeedBackItem = ({ feedbackItem }: Props) => {
       feedbackItem?.question?.options[feedbackItem?.feedback - 1]?.label
   }
 
+  const feedbackValue = feedbackItem?.feedback
+    ? +feedbackItem?.feedback - 1
+    : -1
+
   return (
     <div className={styles.feedback}>
       <p>{feedbackItem?.question.label}</p>
@@ -33,7 +37,7 @@ const FeedBackItem = ({ feedbackItem }: Props) => {
             ) : (
               <Scale
                 scales={feedbackItem?.question.options?.length || 10}
-                value={feedbackItem?.feedback || -1}
+                value={feedbackValue}
                 noAction={true}
                 toolTipText={toolTipText || ''}
               />

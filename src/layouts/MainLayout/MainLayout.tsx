@@ -22,7 +22,6 @@ const MainLayout = ({ children, loggedIn, className, noPadding }: Props) => {
 
   React.useEffect(() => {
     const theme = localStorage.getItem('darkTheme')
-    console.log('Effect running')
 
     if (theme === 'true') {
       setDarkTheme(true)

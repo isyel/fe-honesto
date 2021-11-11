@@ -1,14 +1,20 @@
 import * as React from 'react'
-import { QuestionT } from './QuestionProvider'
+import { FeedbackItemT } from './FeedbackProvider'
 import { UserT } from './types'
 
 export type ReviewsT = {
-  reviewer: UserT | null
-  user: UserT | undefined
-  feedbacks: {
-    question: QuestionT
-    feedback: string | number
-  }[]
+  user: UserT | undefined | null
+  reviews: ReviewItemT[]
+}
+
+export type ReviewItemT = {
+  reviewer: UserT | undefined | null
+  feedbacks: FeedbackItemT[]
+}
+
+export type ReviewItemPayloadT = {
+  user: UserT | undefined | null
+  feedbacks: ReviewItemT
 }
 
 type DispatchReviewerContextT = any
@@ -19,21 +25,38 @@ export const ReviewerContext = React.createContext<ReviewsT[]>([])
 
 type SetReviewsT = {
   action: 'review'
-  payload: ReviewsT
+  payload: ReviewItemPayloadT
 }
+
+// state.find((reviews) => reviews.user?.id === update.payload.user?.id)
+//       ? state.map((reviews) =>
+//           reviews.user?.id === update.payload.user?.id
+//             ? {
+//                 ...reviews,
+//                 feedbacks: [...reviews.feedbacks, ...update.payload.feedbacks],
+//               }
+//             : reviews,
+//         )
+//       : [...state, update.payload]
 
 const reducer = (state: ReviewsT[], update: SetReviewsT): ReviewsT[] => {
   if (update.action === 'review') {
     return state.find((reviews) => reviews.user?.id === update.payload.user?.id)
-      ? state.map((reviews) =>
-          reviews.user?.id === update.payload.user?.id
+      ? state.map((review) =>
+          review.user?.id === update.payload.user?.id
             ? {
-                ...reviews,
-                feedbacks: [...reviews.feedbacks, ...update.payload.feedbacks],
+                ...review,
+                reviews: [...review.reviews, update.payload.feedbacks],
               }
-            : reviews,
+            : review,
         )
-      : [...state, update.payload]
+      : [
+          ...state,
+          {
+            user: update.payload.user,
+            reviews: [update.payload.feedbacks],
+          },
+        ]
   }
 
   return state

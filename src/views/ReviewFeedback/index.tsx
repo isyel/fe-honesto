@@ -5,8 +5,8 @@ import { FeedbackContext, FeedbackT } from '../../context/FeedbackProvider'
 import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
 import classNames from 'classnames'
-import styles from './reviewFeedback.module.css'
 import { UserContext } from '../../context/UserProvider'
+import styles from './reviewFeedback.module.css'
 
 const ReviewFeedback = () => {
   const feedbacks = React.useContext(FeedbackContext)
@@ -19,7 +19,7 @@ const ReviewFeedback = () => {
     (feedback) => feedback.user?.id === userId,
   )
 
-  const [selectedUser, setSelectedUser] = React.useState<UserT | undefined>(
+  const [selectedUser, setSelectedUser] = React.useState<UserT | any>(
     user || feedbacks[0]?.user,
   )
   const [selectedFeedback, setSelectedFeedback] = React.useState<
