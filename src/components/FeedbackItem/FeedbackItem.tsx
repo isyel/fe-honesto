@@ -25,15 +25,13 @@ const FeedBackItem = ({ feedbackItem }: Props) => {
   return (
     <div className={styles.feedback}>
       <p>{feedbackItem?.question.label}</p>
-      <div className={styles.feedback__item}>
+      <div className={styles.feedbackItem}>
         {feedbackItem?.skipped ? (
-          <span className={styles.feedback__skipped}>Skipped</span>
+          <span className={styles.feedbackSkipped}>Skipped</span>
         ) : (
           <>
             {feedbackItem?.question.type === 'text' ? (
-              <p className={styles.feedback__item__text}>
-                {feedbackItem.feedback}
-              </p>
+              <p className={styles.feedbackItemText}>{feedbackItem.feedback}</p>
             ) : (
               <Scale
                 scales={feedbackItem?.question.options?.length || 10}

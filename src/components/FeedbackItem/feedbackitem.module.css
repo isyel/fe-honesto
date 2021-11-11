@@ -7,17 +7,17 @@
   flex: 1 1 50%;
 }
 
-.feedback__item {
+.feedbackItem {
   width: 100%;
 }
 
-.feedback__item__text {
+.feedbackItemText {
   background-color: var(--lightGrey);
   border-radius: var(--borderRadius);
   padding: var(--space-m);
 }
 
-.feedback__skipped {
+.feedbackSkipped {
   padding: var(--space);
   border-radius: var(--borderRadius);
   color: var(--white);

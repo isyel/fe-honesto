@@ -13,8 +13,8 @@ const NotFound = () => {
     <MainLayout loggedIn>
       <div className={styles.container}>
         <div className={styles.notFound}>
-          <h1 className={styles.notFound__header}>404</h1>
-          <p className={styles.notFound__text}>
+          <h1 className={styles.notFoundHeader}>404</h1>
+          <p className={styles.notFoundText}>
             Sorry, the URL you have used may be incorrect. 😢
           </p>
           <p>Check the spelling or navigate using the menu above.</p>
