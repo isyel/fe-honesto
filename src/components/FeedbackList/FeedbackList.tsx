@@ -11,7 +11,7 @@ const FeedbackList = ({ feedbacks }: Props) => {
   return (
     <div className={styles.feedbacks}>
       {feedbacks?.map((feedback, index) => (
-        <li key={index}>
+        <li key={`${Math.random}${index}`}>
           <FeedbackItem feedbackItem={feedback} />
         </li>
       ))}

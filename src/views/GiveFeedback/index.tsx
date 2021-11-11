@@ -35,7 +35,7 @@ const GiveFeedback = () => {
             {users
               .filter((user) => user.id !== currentUser?.id)
               .map((user) => (
-                <li key={user.id} className={styles.user}>
+                <li key={`${Math.random}${user.id}`} className={styles.user}>
                   <User name={user.name} avatarUrl={user.avatarUrl} />
                   <span style={{ flex: 1 }} />
 

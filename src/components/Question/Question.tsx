@@ -15,7 +15,6 @@ type Props = {
   currentQuestionIndex: number
   questionsLength: number
   answers: { question: QuestionT; feedback: string | number }[]
-  saveAnswer: () => void
   handleGoToPreviousQuestion: (se: React.SyntheticEvent) => void
   handleAnswerChange: (
     question: QuestionT | undefined | React.SyntheticEvent,
@@ -107,7 +106,7 @@ const Question = (props: Props) => {
         </div>
         <div className={styles.rating}>
           {[...Array(5)].map((e, index) => (
-            <StarBorderIcon key={index} />
+            <StarBorderIcon key={`${Math.random}${index}`} />
           ))}
 
           <Tooltip

@@ -21,7 +21,7 @@ const MultiChoiceType = (props: Props) => {
       {options &&
         options.map((option, index) => (
           <div
-            key={index}
+            key={`${Math.random}${index}`}
             className={classNames(
               styles.option,
               value === option.value && styles.selected,

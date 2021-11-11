@@ -28,13 +28,15 @@ const Scale = ({
     setScaleHovered(value)
   }
 
+  console.log('toolTipText: ', toolTipText)
+
   return (
-    <Tooltip title={toolTipText || 'ee'} arrow placement="top">
+    <Tooltip title={toolTipText || ''} arrow placement="top">
       <div className={styles.scales}>
         <>
           {[...Array(scales)].map((scale, index) => (
             <div
-              key={Math.random()}
+              key={`${Math.random}${index}`}
               className={classNames(
                 styles.scale,
                 value >= index && styles.selected,

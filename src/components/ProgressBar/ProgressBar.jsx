@@ -12,7 +12,7 @@ const ProgressBar = (props) => {
             styles.scale,
             value >= index && styles.selected,
           )}
-          key={index}
+          key={`${Math.random}${index}`}
         ></div>
       ))}
     </div>

@@ -47,7 +47,7 @@ const ReviewFeedback = () => {
                     styles.user,
                     selectedUser?.id === feedback.user?.id && styles.selected,
                   )}
-                  key={index}
+                  key={`${Math.random}${index}`}
                 >
                   <User
                     id={feedback.user?.id}
