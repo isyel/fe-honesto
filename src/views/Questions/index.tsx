@@ -104,8 +104,6 @@ const Questions = () => {
     history.push(`/questions/${userId}`)
   }
 
-  console.log('currentQuestionIndex: ', currentQuestionIndex)
-
   return (
     <MainLayout loggedIn>
       {!showAppreciation ? (

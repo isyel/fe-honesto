@@ -17,8 +17,6 @@ const Header = ({ handleThemeChange, darkTheme }: Props) => {
   const currentUser = React.useContext(AccountContext)
   const logoutUser = React.useContext(DispatchAccountContext)
 
-  console.log('current user', currentUser)
-
   const handleLogout = () => {
     logoutUser({ action: 'logout' })
   }
