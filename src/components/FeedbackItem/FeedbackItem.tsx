@@ -9,11 +9,14 @@ type Props = {
 
 const FeedBackItem = ({ feedbackItem }: Props) => {
   let toolTipText
+
   if (
     feedbackItem?.question?.options &&
     typeof feedbackItem?.feedback === 'number'
-  )
-    toolTipText = feedbackItem?.question?.options[feedbackItem?.feedback]?.label
+  ) {
+    toolTipText =
+      feedbackItem?.question?.options[feedbackItem?.feedback - 1]?.label
+  }
 
   return (
     <div className={styles.feedback}>

@@ -67,28 +67,29 @@ const Questions = () => {
       feedback: answer,
       skipped,
     }
-    setAnswers((answers) =>
-      answerExists
-        ? answers.map((answer) =>
-            answer.question.id === question.id ? newAnswer : answer,
-          )
-        : [...answers, newAnswer],
-    )
-  }
 
-  React.useEffect(() => {
+    const updatedAnswers = answerExists
+      ? answers.map((answer) =>
+          answer.question.id === question.id ? newAnswer : answer,
+        )
+      : [...answers, newAnswer]
+
+    setAnswers(updatedAnswers)
     if (currentQuestionIndex + 1 === questions?.length) {
-      saveAnswer()
+      saveAnswer(updatedAnswers)
     } else {
       handleGoToNextQuestion()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answers])
+  }
 
-  const saveAnswer = () => {
+  console.log('answers: ', answers)
+
+  const saveAnswer = (
+    updatedAnswers: { question: any; feedback: any; skipped: boolean }[],
+  ) => {
     const feedback: FeedbackT = {
       user: user,
-      feedback: answers,
+      feedback: updatedAnswers,
     }
     const review: ReviewsT = {
       reviewer: currentUser,
@@ -111,6 +112,8 @@ const Questions = () => {
     history.push(`/questions/${userId}`)
   }
 
+  console.log('currentQuestionIndex: ', currentQuestionIndex)
+
   return (
     <MainLayout loggedIn>
       {!showAppreciation ? (
@@ -130,12 +133,11 @@ const Questions = () => {
               index === currentQuestionIndex && (
                 <Question
                   answers={answers}
-                  key={question.id}
+                  key={`${Math.random}${question.id}`}
                   question={question}
                   currentQuestionIndex={currentQuestionIndex}
                   questionsLength={questions.length}
                   handleAnswerChange={handleAnswerChange}
-                  saveAnswer={saveAnswer}
                   handleGoToPreviousQuestion={handleGoToPreviousQuestion}
                 />
               )
@@ -157,7 +159,7 @@ const Questions = () => {
                     ),
                 )
                 .map((user) => (
-                  <li key={user.id} className={styles.user}>
+                  <li key={`${Math.random}${user.id}`} className={styles.user}>
                     <User name={user.name} avatarUrl={user.avatarUrl} />
                     <span style={{ flex: 1 }} />
                     <Button onClick={() => goToUserFeedback(user.id)}>

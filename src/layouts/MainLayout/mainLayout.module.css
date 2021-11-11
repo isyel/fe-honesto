@@ -10,6 +10,7 @@
 
 .lightTheme {
   --lightGrey: #f2f3f4;
+  --darkGrey: #9b9b9b;
   /* COLORS */
   --white: #ffffff;
   --black: #000000;
@@ -26,6 +27,7 @@
 
 .darkTheme {
   --lightGrey: #a4a5a5;
+  --darkGrey: #9b9b9b;
   /* COLORS */
   --white: #000000;
   --black: #ffffff;
