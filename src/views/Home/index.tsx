@@ -34,6 +34,7 @@ const Home = () => {
             <label htmlFor="loginNames">Login as:</label>
             <Select<UserT>
               id="loginNames"
+              className={styles.loginNames}
               options={allUsers!!}
               getOptionLabel={(user: UserT) => user.name || ''}
               getOptionValue={(user: UserT) => user.id || ''}
