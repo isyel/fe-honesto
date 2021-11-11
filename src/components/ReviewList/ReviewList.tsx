@@ -1,14 +1,13 @@
 import * as React from 'react'
 import classNames from 'classnames'
-import styles from './scale.module.css'
+import styles from './reviewList.module.css'
 import FeedbackList from '../FeedbackList'
 import { ReviewItemT } from '../../context/ReviewerProvider'
 import { UserT } from '../../context/types'
 import User from '../User'
-import { FeedbackItemT } from '../../context/FeedbackProvider'
 
 type Props = {
-  userReviews: ReviewItemT[] | FeedbackItemT[] | any[]
+  userReviews: any[]
   selectedUser?: UserT | null
   selectedFeedback?: ReviewItemT
   handleSelectUser?: (user: UserT) => void

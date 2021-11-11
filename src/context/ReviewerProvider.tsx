@@ -28,17 +28,6 @@ type SetReviewsT = {
   payload: ReviewItemPayloadT
 }
 
-// state.find((reviews) => reviews.user?.id === update.payload.user?.id)
-//       ? state.map((reviews) =>
-//           reviews.user?.id === update.payload.user?.id
-//             ? {
-//                 ...reviews,
-//                 feedbacks: [...reviews.feedbacks, ...update.payload.feedbacks],
-//               }
-//             : reviews,
-//         )
-//       : [...state, update.payload]
-
 const reducer = (state: ReviewsT[], update: SetReviewsT): ReviewsT[] => {
   if (update.action === 'review') {
     return state.find((reviews) => reviews.user?.id === update.payload.user?.id)

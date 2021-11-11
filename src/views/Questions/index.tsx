@@ -83,8 +83,6 @@ const Questions = () => {
     }
   }
 
-  console.log('answers: ', answers)
-
   const saveAnswer = (updatedAnswers: FeedbackItemT[]) => {
     const feedback: FeedbackT = {
       user: user,

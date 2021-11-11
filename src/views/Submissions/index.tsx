@@ -1,12 +1,10 @@
 import * as React from 'react'
-import User from '../../components/User'
 import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
-import classNames from 'classnames'
 import styles from './submissions.module.css'
 import { ReviewerContext, ReviewsT } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
-import FeedbackList from '../../components/FeedbackList'
+import ReviewList from '../../components/ReviewList'
 
 const Submissions = () => {
   const submissions = React.useContext(ReviewerContext)
@@ -33,40 +31,12 @@ const Submissions = () => {
   return (
     <MainLayout loggedIn>
       {userReviews && userReviews?.length > 0 ? (
-        <>
-          <h1>Review Feedback Received</h1>
-          <div className={styles.feedbackContainer}>
-            <ul className={styles.users}>
-              <li>
-                <h3>Feedback Received</h3>
-              </li>
-              {userReviews.map((feedback, index) => (
-                <li
-                  className={classNames(
-                    styles.user,
-                    selectedUser?.id === feedback.reviewer?.id &&
-                      styles.selected,
-                  )}
-                  key={`${Math.random}${index}`}
-                >
-                  <User
-                    id={feedback.reviewer?.id}
-                    name={feedback.reviewer?.name}
-                    avatarUrl={feedback.reviewer?.avatarUrl}
-                    handleOnClick={handleSelectUser}
-                  />
-                </li>
-              ))}
-            </ul>
-
-            <ul className={styles.feedback}>
-              <li>
-                <h2>{selectedUser?.name}'s Review</h2>
-              </li>
-              <FeedbackList feedbacks={selectedFeedback?.feedbacks} />
-            </ul>
-          </div>
-        </>
+        <ReviewList
+          userReviews={userReviews}
+          selectedUser={selectedUser}
+          selectedFeedback={selectedFeedback}
+          handleSelectUser={handleSelectUser}
+        />
       ) : (
         <div className={styles.noFeedback}>
           <h1>No Reviews received 😔</h1>
