@@ -1,7 +1,7 @@
 .footer {
   align-items: center;
   background-color: var(--accentColor);
-  color: var(--copyLightColor);
+  color: white;
   display: flex;
   justify-content: space-between;
   padding: 0 var(--baseHorzSpacing);

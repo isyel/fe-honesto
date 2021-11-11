@@ -28,10 +28,6 @@ const Questions = () => {
   const [showAppreciation, setshowAppreciation] = React.useState<boolean>(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] =
     React.useState<number>(0)
-
-  const history = useHistory()
-  const { userId } = useParams<{ userId: string }>()
-  const user = users?.find((user) => user.id === userId)
   const [answers, setAnswers] = React.useState<
     {
       question: QuestionT
@@ -39,6 +35,10 @@ const Questions = () => {
       skipped: boolean
     }[]
   >([])
+
+  const history = useHistory()
+  const { userId } = useParams<{ userId: string }>()
+  const user = users?.find((user) => user.id === userId)
 
   const handleGoToNextQuestion = () => {
     setCurrentQuestionIndex((currentQuestionIndex) =>
@@ -100,9 +100,21 @@ const Questions = () => {
   }
 
   const goToUserFeedback = (userId: string | undefined) => {
-    setshowAppreciation(false)
+    setCurrentQuestionIndex(0)
+    setAnswers([])
     history.push(`/questions/${userId}`)
+    setshowAppreciation(false)
   }
+
+  const goToFeedbacksPage = () => {
+    history.push('/my-feedback')
+  }
+
+  const pendingUsers = users?.filter(
+    (user) =>
+      user.id !== currentUser?.id &&
+      !feedbacks.some((feedback) => feedback.user?.id === user.id),
+  )
 
   return (
     <MainLayout loggedIn>
@@ -137,27 +149,31 @@ const Questions = () => {
       ) : (
         <div className={styles.wrapper}>
           <h1>Thank you for sharing your feedback</h1>
-          <p>Continue to give feedback to other members</p>
-          {users && users.length > 0 && (
-            <ul className={styles.users}>
-              {users
-                .filter(
-                  (user) =>
-                    user.id !== currentUser?.id &&
-                    !feedbacks.some(
-                      (feedback) => feedback.user?.id === user.id,
-                    ),
-                )
-                .map((user) => (
-                  <li key={`${Math.random}${user.id}`} className={styles.user}>
-                    <User name={user.name} avatarUrl={user.avatarUrl} />
-                    <span style={{ flex: 1 }} />
-                    <Button onClick={() => goToUserFeedback(user.id)}>
-                      Fill out
-                    </Button>
-                  </li>
-                ))}
-            </ul>
+          {pendingUsers && pendingUsers?.length > 0 ? (
+            <>
+              <p>Continue to give feedback to other members</p>
+              {users && users.length > 0 && (
+                <ul className={styles.users}>
+                  {pendingUsers?.map((user) => (
+                    <li
+                      key={`${Math.random}${user.id}`}
+                      className={styles.user}
+                    >
+                      <User name={user.name} avatarUrl={user.avatarUrl} />
+                      <span style={{ flex: 1 }} />
+                      <Button onClick={() => goToUserFeedback(user.id)}>
+                        Fill out
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          ) : (
+            <div>
+              <p> All User Reviewed</p>
+              <Button onClick={goToFeedbacksPage}>View Feedbacks</Button>
+            </div>
           )}
         </div>
       )}
