@@ -1,7 +1,10 @@
-import { ReviewsT } from '../context/ReviewerProvider'
+import { FeedbackT, ReviewsT } from '../context/ReviewerProvider'
 import { UserT } from '../context/types'
 
-export function getFeedbacks(reviews: ReviewsT[], userData: UserT | null) {
+export function getFeedbacks(
+  reviews: ReviewsT[],
+  userData: UserT | null,
+): FeedbackT[] {
   return reviews
     ?.filter((review) =>
       review.reviews.some((review) => review.reviewer?.id === userData?.id),

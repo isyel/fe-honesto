@@ -9,7 +9,7 @@ export type ReviewsT = {
 
 export type ReviewItemT = {
   reviewer: UserT | undefined | null
-  feedbacks: FeedbackItemT[]
+  feedbacks: FeedbackItemT[] | undefined
 }
 
 export type ReviewItemPayloadT = {
@@ -19,7 +19,7 @@ export type ReviewItemPayloadT = {
 
 export type FeedbackT = {
   user: UserT | undefined | null
-  feedback: FeedbackItemT[]
+  feedback: FeedbackItemT[] | undefined
 }
 
 export type FeedbackItemT = {

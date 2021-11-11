@@ -25,11 +25,11 @@ const Questions = () => {
   const reviewDispatch = React.useContext(DispatchReviewerContext)
   const reviews = React.useContext(ReviewerContext)
   const feedbacks = getFeedbacks(reviews, currentUser)
-  const [showAppreciation, setshowAppreciation] = React.useState(false)
-  const history = useHistory()
-
+  const [showAppreciation, setshowAppreciation] = React.useState<boolean>(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] =
     React.useState<number>(0)
+
+  const history = useHistory()
   const { userId } = useParams<{ userId: string }>()
   const user = users?.find((user) => user.id === userId)
   const [answers, setAnswers] = React.useState<
@@ -135,7 +135,7 @@ const Questions = () => {
           })}
         </div>
       ) : (
-        <div>
+        <div className={styles.wrapper}>
           <h1>Thank you for sharing your feedback</h1>
           <p>Continue to give feedback to other members</p>
           {users && users.length > 0 && (
