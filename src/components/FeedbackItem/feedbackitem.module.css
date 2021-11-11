@@ -1,0 +1,25 @@
+.feedback {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.feedback:nth-child(1) {
+  flex: 1 1 50%;
+}
+
+.feedback__item {
+  width: 100%;
+}
+
+.feedback__item__text {
+  background-color: var(--lightGrey);
+  border-radius: var(--borderRadius);
+  padding: var(--space-m);
+}
+
+.feedback__skipped {
+  padding: var(--space);
+  border-radius: var(--borderRadius);
+  color: var(--white);
+  background-color: var(--black);
+}

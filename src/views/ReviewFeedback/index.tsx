@@ -41,12 +41,13 @@ const ReviewFeedback = () => {
               <li>
                 <h3>Feedback given</h3>
               </li>
-              {feedbacks.map((feedback) => (
+              {feedbacks.map((feedback, index) => (
                 <li
                   className={classNames(
                     styles.user,
                     selectedUser?.id === feedback.user?.id && styles.selected,
                   )}
+                  key={index}
                 >
                   <User
                     id={feedback.user?.id}

@@ -106,8 +106,8 @@ const Question = (props: Props) => {
           </span>
         </div>
         <div className={styles.rating}>
-          {[...Array(5)].map((e) => (
-            <StarBorderIcon key={e} />
+          {[...Array(5)].map((e, index) => (
+            <StarBorderIcon key={index} />
           ))}
 
           <Tooltip

@@ -38,6 +38,7 @@ const Questions = () => {
     {
       question: QuestionT
       feedback: string | number
+      skipped: boolean
     }[]
   >([])
 
@@ -73,12 +74,16 @@ const Questions = () => {
           )
         : [...answers, newAnswer],
     )
+  }
+
+  React.useEffect(() => {
     if (currentQuestionIndex + 1 === questions?.length) {
       saveAnswer()
     } else {
       handleGoToNextQuestion()
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answers])
 
   const saveAnswer = () => {
     const feedback: FeedbackT = {

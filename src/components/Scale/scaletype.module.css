@@ -8,10 +8,17 @@
 }
 
 .scale {
-  height: 50px;
   background-color: var(--lightGrey);
   cursor: pointer;
   transition: ease-in-out 0.2s;
+}
+
+.scaleHeight {
+  height: 50px;
+}
+
+.padding {
+  padding: 0.6em 2em;
 }
 
 .hovered {

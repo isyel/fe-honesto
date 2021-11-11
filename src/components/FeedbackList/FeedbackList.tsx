@@ -1,16 +1,19 @@
 import * as React from 'react'
-import { QuestionT } from '../../context/QuestionProvider'
+import { FeedbackItemT } from '../../context/FeedbackProvider'
+import FeedbackItem from '../FeedbackItem'
 import styles from './feedbacklist.module.css'
 
 type Props = {
-  feedbacks?: { question: QuestionT; feedback: string | number }[]
+  feedbacks?: FeedbackItemT[]
 }
 
 const FeedbackList = ({ feedbacks }: Props) => {
   return (
     <div className={styles.feedbacks}>
-      {feedbacks?.map((feedback) => (
-        <li>feedbacks</li>
+      {feedbacks?.map((feedback, index) => (
+        <li key={index}>
+          <FeedbackItem feedbackItem={feedback} />
+        </li>
       ))}
     </div>
   )
