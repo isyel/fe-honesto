@@ -1,20 +1,26 @@
 import * as React from 'react'
 import FeedbackList from '../../components/FeedbackList'
 import User from '../../components/User'
-import { FeedbackContext, FeedbackT } from '../../context/FeedbackProvider'
+import { FeedbackT } from '../../context/FeedbackProvider'
 import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
 import classNames from 'classnames'
 import { UserContext } from '../../context/UserProvider'
 import styles from './reviewFeedback.module.css'
+import { ReviewerContext } from '../../context/ReviewerProvider'
+import { AccountContext } from '../../context/AccountProvider'
+import { getFeedbacks } from '../../common/util'
 
 const ReviewFeedback = () => {
-  const feedbacks = React.useContext(FeedbackContext)
+  const reviews = React.useContext(ReviewerContext)
   const users = React.useContext(UserContext)
+  const currentUser = React.useContext(AccountContext)
   const search = window.location.search
   const params = new URLSearchParams(search)
   const userId = params.get('user')
   const user = users?.find((user: UserT) => user.id === userId)
+  const feedbacks = getFeedbacks(reviews, currentUser)
+
   const userFeedback = feedbacks.find(
     (feedback) => feedback.user?.id === userId,
   )
@@ -23,7 +29,7 @@ const ReviewFeedback = () => {
     user || feedbacks[0]?.user,
   )
   const [selectedFeedback, setSelectedFeedback] = React.useState<
-    FeedbackT | undefined
+    FeedbackT | undefined | any
   >(userFeedback || feedbacks[0])
 
   const handleSelectUser = (user: UserT) => {
