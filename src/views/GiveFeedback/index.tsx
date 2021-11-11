@@ -14,15 +14,15 @@ const GiveFeedback = () => {
   const feedbacks = React.useContext(FeedbackContext)
   const history = useHistory()
 
-  const goToUserFeedback = (userId: string) => {
+  const goToUserFeedback = (userId: string | undefined) => {
     history.push(`/questions/${userId}`)
   }
 
-  const viewSubmission = (userId: string) => {
+  const viewSubmission = (userId: string | undefined) => {
     history.push(`/submission/${userId}`)
   }
 
-  const isAlreadyReviewed = (userId: string) => {
+  const isAlreadyReviewed = (userId: string | undefined) => {
     return feedbacks.some((feedback) => feedback.user?.id === userId)
   }
 

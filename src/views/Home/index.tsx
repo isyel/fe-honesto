@@ -35,8 +35,8 @@ const Home = () => {
             <Select<UserT>
               id="loginNames"
               options={allUsers!!}
-              getOptionLabel={(user: UserT) => user.name}
-              getOptionValue={(user: UserT) => user.id}
+              getOptionLabel={(user: UserT) => user.name || ''}
+              getOptionValue={(user: UserT) => user.id || ''}
               value={selectedUser}
               onChange={setUserForLogin}
             />

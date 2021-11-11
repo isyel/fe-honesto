@@ -85,11 +85,9 @@ const Question = (props: Props) => {
             Previous
           </Button>
         )}
-        {currentQuestionIndex + 1 !== questionsLength && (
-          <Button secondary onClick={handleSkipQuestion}>
-            Skip
-          </Button>
-        )}
+        <Button secondary onClick={handleSkipQuestion}>
+          Skip
+        </Button>
         <Button
           secondary={!selectedAnswer}
           onClick={() => handleAnswerChange(question, false, selectedAnswer)}

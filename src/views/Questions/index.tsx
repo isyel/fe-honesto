@@ -14,7 +14,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import User from '../../components/User'
 import {
   DispatchReviewerContext,
-  ReviewerContext,
   ReviewsT,
 } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
@@ -27,12 +26,9 @@ const Questions = () => {
   const feedbackDispatch = React.useContext(DispatchFeedbackContext)
   const reviewDispatch = React.useContext(DispatchReviewerContext)
   const feedbacks = React.useContext(FeedbackContext)
-  const reviews = React.useContext(ReviewerContext)
+  // const reviews = React.useContext(ReviewerContext)
   const [showAppreciation, setshowAppreciation] = React.useState(false)
   const history = useHistory()
-
-  console.log('feedbacks: ', feedbacks)
-  console.log('reviews: ', reviews)
 
   const [currentQuestionIndex, setCurrentQuestionIndex] =
     React.useState<number>(0)
@@ -105,8 +101,9 @@ const Questions = () => {
     setshowAppreciation(true)
   }
 
-  const goToUserFeedback = (userId: string) => {
-    history.push(`questions/${userId}`)
+  const goToUserFeedback = (userId: string | undefined) => {
+    setshowAppreciation(false)
+    history.push(`/questions/${userId}`)
   }
 
   return (
