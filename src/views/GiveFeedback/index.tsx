@@ -6,12 +6,14 @@ import Button from '../../components/Button'
 import styles from './giveFeedback.module.css'
 import { useHistory } from 'react-router-dom'
 import { AccountContext } from '../../context/AccountProvider'
-import { FeedbackContext } from '../../context/FeedbackProvider'
+import { getFeedbacks } from '../../common/util'
+import { ReviewerContext } from '../../context/ReviewerProvider'
 
 const GiveFeedback = () => {
   const users = React.useContext(UserContext)
   const currentUser = React.useContext(AccountContext)
-  const feedbacks = React.useContext(FeedbackContext)
+  const reviews = React.useContext(ReviewerContext)
+  const feedbacks = getFeedbacks(reviews, currentUser)
   const history = useHistory()
 
   const goToUserFeedback = (userId: string | undefined) => {

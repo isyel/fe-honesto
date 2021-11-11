@@ -8,7 +8,6 @@ import UserProvider from './context/UserProvider'
 import QuestionProvider from './context/QuestionProvider'
 import AccountProvider from './context/AccountProvider'
 import ReviewerProvider from './context/ReviewerProvider'
-import FeedbackProvider from './context/FeedbackProvider'
 
 worker.start().then(() => {
   ReactDOM.render(
@@ -17,9 +16,7 @@ worker.start().then(() => {
         <UserProvider>
           <QuestionProvider>
             <ReviewerProvider>
-              <FeedbackProvider>
-                <App />
-              </FeedbackProvider>
+              <App />
             </ReviewerProvider>
           </QuestionProvider>
         </UserProvider>

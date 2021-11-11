@@ -13,8 +13,6 @@ const Submissions = () => {
     (submission) => submission.user?.id === currentUser?.id,
   )?.reviews
 
-  console.log('submissions: ', submissions)
-
   const [selectedUser, setSelectedUser] = React.useState<
     UserT | undefined | null
   >(userReviews ? userReviews[0]?.reviewer : undefined)

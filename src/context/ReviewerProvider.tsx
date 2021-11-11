@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FeedbackItemT } from './FeedbackProvider'
+import { QuestionT } from './QuestionProvider'
 import { UserT } from './types'
 
 export type ReviewsT = {
@@ -15,6 +15,17 @@ export type ReviewItemT = {
 export type ReviewItemPayloadT = {
   user: UserT | undefined | null
   feedbacks: ReviewItemT
+}
+
+export type FeedbackT = {
+  user: UserT | undefined | null
+  feedback: FeedbackItemT[]
+}
+
+export type FeedbackItemT = {
+  question: QuestionT
+  feedback: string | number
+  skipped: boolean
 }
 
 type DispatchReviewerContextT = any

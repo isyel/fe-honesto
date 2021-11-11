@@ -4,30 +4,27 @@ import MainLayout from '../../layouts/MainLayout'
 import styles from './questions.module.css'
 import { QuestionContext, QuestionT } from '../../context/QuestionProvider'
 import Question from '../../components/Question'
-import {
-  DispatchFeedbackContext,
-  FeedbackContext,
-  FeedbackItemT,
-  FeedbackT,
-} from '../../context/FeedbackProvider'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import User from '../../components/User'
 import {
   DispatchReviewerContext,
+  FeedbackItemT,
+  FeedbackT,
+  ReviewerContext,
   ReviewItemPayloadT,
 } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
 import Button from '../../components/Button'
+import { getFeedbacks } from '../../common/util'
 
 const Questions = () => {
   const currentUser = React.useContext(AccountContext)
   const users = React.useContext(UserContext)
   const questions = React.useContext(QuestionContext)
-  const feedbackDispatch = React.useContext(DispatchFeedbackContext)
   const reviewDispatch = React.useContext(DispatchReviewerContext)
-  const feedbacks = React.useContext(FeedbackContext)
-  // const reviews = React.useContext(ReviewerContext)
+  const reviews = React.useContext(ReviewerContext)
+  const feedbacks = getFeedbacks(reviews, currentUser)
   const [showAppreciation, setshowAppreciation] = React.useState(false)
   const history = useHistory()
 
@@ -95,10 +92,6 @@ const Questions = () => {
         feedbacks: feedback.feedback,
       },
     }
-    feedbackDispatch({
-      action: 'feedback',
-      payload: feedback,
-    })
     reviewDispatch({
       action: 'review',
       payload: review,

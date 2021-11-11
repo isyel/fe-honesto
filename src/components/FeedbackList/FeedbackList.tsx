@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FeedbackItemT } from '../../context/FeedbackProvider'
+import { FeedbackItemT } from '../../context/ReviewerProvider'
 import FeedbackItem from '../FeedbackItem'
 import styles from './feedBackList.module.css'
 
