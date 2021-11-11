@@ -61,13 +61,14 @@ const Questions = () => {
     )
   }
 
-  const handleAnswerChange = (question: any, answer: any) => {
+  const handleAnswerChange = (question: any, skipped: boolean, answer: any) => {
     const answerExists = answers.some(
       (answer) => answer.question.id === question.id,
     )
     const newAnswer = {
       question,
       feedback: answer,
+      skipped,
     }
     setAnswers((answers) =>
       answerExists
@@ -126,12 +127,12 @@ const Questions = () => {
             return (
               index === currentQuestionIndex && (
                 <Question
+                  answers={answers}
                   key={question.id}
                   question={question}
                   currentQuestionIndex={currentQuestionIndex}
                   questionsLength={questions.length}
                   handleAnswerChange={handleAnswerChange}
-                  handleGoToNextQuestion={handleGoToNextQuestion}
                   saveAnswer={saveAnswer}
                   handleGoToPreviousQuestion={handleGoToPreviousQuestion}
                 />

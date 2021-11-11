@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './scaletype.module.css'
 
 type Props = {
-  value: number
+  value: number | string
   scales?: number
   handleAddChangeAnswer: (answer: any) => void
 }

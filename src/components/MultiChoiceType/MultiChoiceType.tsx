@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import styles from './multichoicetype.module.css'
 
 type Props = {
-  value: number | null
+  value: number | string | null
   options: OptionsT[] | undefined
   handleAddChangeAnswer: (answer: any) => void
 }

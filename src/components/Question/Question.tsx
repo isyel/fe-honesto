@@ -14,11 +14,12 @@ type Props = {
   question?: QuestionT
   currentQuestionIndex: number
   questionsLength: number
+  answers: { question: QuestionT; feedback: string | number }[]
   saveAnswer: () => void
-  handleGoToNextQuestion: (se: React.SyntheticEvent) => void
   handleGoToPreviousQuestion: (se: React.SyntheticEvent) => void
   handleAnswerChange: (
     question: QuestionT | undefined | React.SyntheticEvent,
+    skipped: boolean,
     answer: any,
   ) => void
 }
@@ -28,14 +29,20 @@ const Question = (props: Props) => {
     question,
     currentQuestionIndex,
     questionsLength,
-    handleGoToNextQuestion,
     handleGoToPreviousQuestion,
     handleAnswerChange,
   } = props
-  const [selectedAnswer, setSelectedAnswer] = React.useState()
+  const answer = props.answers.find(
+    (answer) => answer.question.id === question?.id,
+  )
+  const [selectedAnswer, setSelectedAnswer] = React.useState(answer?.feedback)
 
   const handleAddChangeAnswer = (answer: any) => {
     setSelectedAnswer(answer)
+  }
+
+  const handleSkipQuestion = () => {
+    handleAnswerChange(question, true, null)
   }
 
   const showOptions = () => {
@@ -52,7 +59,7 @@ const Question = (props: Props) => {
         return (
           <TextType
             handleAddChangeAnswer={handleAddChangeAnswer}
-            value={selectedAnswer}
+            value={selectedAnswer?.toString() || ''}
           />
         )
       case 'multipleChoice':
@@ -73,15 +80,19 @@ const Question = (props: Props) => {
     <div className={styles.wrapper}>
       <div className={styles.question}>{showOptions()}</div>
       <div className={styles.buttons}>
-        <Button secondary onClick={handleGoToPreviousQuestion}>
-          Previous
-        </Button>
-        <Button secondary onClick={handleGoToNextQuestion}>
-          Skip
-        </Button>
+        {currentQuestionIndex > 0 && (
+          <Button secondary onClick={handleGoToPreviousQuestion}>
+            Previous
+          </Button>
+        )}
+        {currentQuestionIndex + 1 !== questionsLength && (
+          <Button secondary onClick={handleSkipQuestion}>
+            Skip
+          </Button>
+        )}
         <Button
           secondary={!selectedAnswer}
-          onClick={() => handleAnswerChange(question, selectedAnswer)}
+          onClick={() => handleAnswerChange(question, false, selectedAnswer)}
           disabled={!selectedAnswer}
         >
           {currentQuestionIndex + 1 === questionsLength ? 'Submit' : 'Next'}
