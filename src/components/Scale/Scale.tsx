@@ -21,12 +21,24 @@ const Scale = ({
   const [scaleHovered, setScaleHovered] = React.useState(value || -1)
 
   const handleSelectScale = (value: number) => {
-    handleAddChangeAnswer && handleAddChangeAnswer(value)
+    handleAddChangeAnswer && handleAddChangeAnswer(value + 1)
   }
 
   const handleHoverScale = (value: number) => {
     setScaleHovered(value)
   }
+
+  let scaleLevel = 0
+  if (scales && value) scaleLevel = scales / +value
+
+  console.log(
+    'scales: ',
+    scales,
+    '  value: ',
+    value,
+    '---- scaleLevel: ',
+    scaleLevel,
+  )
 
   return (
     <Tooltip
@@ -43,7 +55,14 @@ const Scale = ({
               key={`${Math.random}${index}`}
               className={classNames(
                 styles.scale,
-                value >= index && styles.selected,
+                value > index &&
+                  (!noAction
+                    ? styles.selected
+                    : scaleLevel > 2
+                    ? styles.selectedDanger
+                    : scaleLevel <= 1
+                    ? styles.selectedSuccess
+                    : styles.selectedWarning),
                 scaleHovered >= index && !noAction && styles.hovered,
                 !noAction ? styles.scaleHeight : styles.padding,
               )}

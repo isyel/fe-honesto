@@ -28,3 +28,15 @@
 .selected {
   background-color: var(--primaryColor);
 }
+
+.selectedDanger {
+  background-color: var(--dangerColor);
+}
+
+.selectedSuccess {
+  background-color: var(--successColor);
+}
+
+.selectedWarning {
+  background-color: var(--warningColor);
+}

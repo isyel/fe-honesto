@@ -22,6 +22,9 @@
   --space: 0.5em;
   --space-m: 1em;
   --baseVertSpacing: 3rem;
+  --dangerColor: #eb445a;
+  --warningColor: #ffc409;
+  --successColor: #2dd36f;
 }
 
 * {

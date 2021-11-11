@@ -18,9 +18,7 @@ const FeedBackItem = ({ feedbackItem }: Props) => {
       feedbackItem?.question?.options[feedbackItem?.feedback - 1]?.label
   }
 
-  const feedbackValue = feedbackItem?.feedback
-    ? +feedbackItem?.feedback - 1
-    : -1
+  const feedbackValue = feedbackItem?.feedback ? +feedbackItem?.feedback : -1
 
   return (
     <div className={styles.feedback}>
