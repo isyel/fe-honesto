@@ -2,6 +2,8 @@
   display: grid;
   grid-template-rows: 1fr 60px;
   min-height: 100vh;
+  background-color: var(--white);
+  color: var(--copyColor);
 }
 
 .loggedIn {
@@ -26,18 +28,18 @@
 }
 
 .darkTheme {
-  --lightGrey: #a4a5a5;
+  --lightGrey: #1d1d1d;
   --darkGrey: #9b9b9b;
   /* COLORS */
   --white: #000000;
   --black: #ffffff;
-  --accentColor: #17161a;
+  --accentColor: #898596;
   --borderColor: #383838;
-  --copyColor: #1b1a1a;
+  --copyColor: #ebebeb;
   --copyDarkColor: var(--black);
   --copyLightColor: var(--white);
-  --primaryColor: #69239b;
-  --primaryLightColor: #4b4a4a;
-  --primaryMediumColor: #5e5963;
+  --primaryColor: #ab61e5;
+  --primaryLightColor: #b470eb5d;
+  --primaryMediumColor: #b779ebb2;
   --baseBorder: 1px solid var(--borderColor);
 }
