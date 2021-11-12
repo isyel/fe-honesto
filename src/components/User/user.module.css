@@ -5,6 +5,13 @@
   gap: var(--baseHorzSpacing);
 }
 
+@media screen and (max-width: 768px) {
+  .user {
+    font-size: var(--fs-base);
+    gap: var(--space-m);
+  }
+}
+
 .initials,
 .avatar {
   border-radius: 50%;
@@ -12,6 +19,14 @@
   display: inline-block;
   height: 58px;
   width: 58px;
+}
+
+@media screen and (max-width: 768px) {
+  .initials,
+  .avatar {
+    height: var(--fs-xxl);
+    width: var(--fs-xxl);
+  }
 }
 
 .initials {

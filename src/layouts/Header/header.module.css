@@ -1,10 +1,16 @@
-.header {
+.header,
+.mobileMenu {
   align-items: stretch;
   background-color: var(--lightGrey);
   border-bottom: var(--baseBorder);
   display: flex;
   gap: 2rem;
   padding: 0 var(--baseHorzSpacing);
+  /* height: 70px; */
+}
+
+.header {
+  min-height: 70px;
 }
 
 .header h1 {
@@ -12,14 +18,16 @@
 }
 
 .header h1,
-.header a {
+.header a,
+.mobileMenu a {
   align-items: center;
   color: var(--copyColor);
   display: flex;
   margin: 0;
 }
 
-.header a {
+.header a,
+.mobileMenu a {
   border-bottom: 3px solid var(--lightGrey);
   margin-bottom: 1px;
   padding-top: 10px;
@@ -33,4 +41,61 @@
 .spacer {
   border-right: var(--baseBorder);
   flex: 1;
+}
+
+.menuButton,
+.mobileMenu {
+  display: none;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 var(--space-l);
+  }
+
+  .header a {
+    display: none;
+  }
+
+  .spacer {
+    flex: 0;
+  }
+
+  .logout {
+    display: block !important;
+    align-self: center;
+    text-align: right;
+    padding-top: 0;
+    font-size: var(--fs-sm);
+  }
+
+  .menuButton {
+    display: block;
+    align-self: center;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    z-index: 99;
+    gap: 1em;
+    padding: var(--space-m) var(--space-l);
+  }
+
+  .mobileMenu > * {
+    font-size: var(--fs-l);
+  }
+
+  .mobileMenu a {
+    padding-bottom: var(--space);
+  }
 }

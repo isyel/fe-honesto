@@ -1,9 +1,27 @@
 .mainLayout {
   display: grid;
-  grid-template-rows: 1fr 60px;
+  grid-template-rows: 1fr 70px;
   min-height: 100vh;
   background-color: var(--white);
   color: var(--copyColor);
+}
+
+@media screen and (max-width: 768px) {
+  .mainLayout {
+    font-size: 0.7em;
+  }
+
+  h1 {
+    font-size: var(--fs-l);
+  }
+
+  h2 {
+    font-size: var(--fs-base);
+  }
+
+  h3 {
+    font-size: var(--fs-sm);
+  }
 }
 
 .loggedIn {

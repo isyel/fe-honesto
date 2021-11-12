@@ -4,5 +4,7 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 0 var(--baseHorzSpacing);
+  flex-wrap: wrap;
+  gap: var(--space);
+  padding: var(--space) var(--baseHorzSpacing);
 }

@@ -20,31 +20,31 @@ const ReviewList = (props: Props) => {
   return (
     <>
       <div className={styles.feedbackContainer}>
-        <ul className={styles.users}>
-          <li>
-            <h3>Feedback Received</h3>
-          </li>
-          {userReviews.map((feedback, index) => (
-            <li
-              className={classNames(
-                styles.user,
-                selectedUser?.id ===
-                  (feedback.reviewer?.id || feedback.user?.id) &&
-                  styles.selected,
-              )}
-              key={`${Math.random}${index}`}
-            >
-              <User
-                id={feedback.reviewer?.id || feedback.user?.id}
-                name={feedback.reviewer?.name || feedback.user?.name}
-                avatarUrl={
-                  feedback.reviewer?.avatarUrl || feedback.user?.avatarUrl
-                }
-                handleOnClick={handleSelectUser}
-              />
-            </li>
-          ))}
-        </ul>
+        <aside className={styles.users}>
+          <h3>Feedback Received</h3>
+          <ul className={styles.usersList}>
+            {userReviews.map((feedback, index) => (
+              <li
+                className={classNames(
+                  styles.user,
+                  selectedUser?.id ===
+                    (feedback.reviewer?.id || feedback.user?.id) &&
+                    styles.selected,
+                )}
+                key={`${Math.random}${index}`}
+              >
+                <User
+                  id={feedback.reviewer?.id || feedback.user?.id}
+                  name={feedback.reviewer?.name || feedback.user?.name}
+                  avatarUrl={
+                    feedback.reviewer?.avatarUrl || feedback.user?.avatarUrl
+                  }
+                  handleOnClick={handleSelectUser}
+                />
+              </li>
+            ))}
+          </ul>
+        </aside>
 
         <ul className={styles.feedback}>
           <li>

@@ -6,11 +6,12 @@ type Props = {
   id?: string
   name?: string
   avatarUrl?: string
+  onlyImage?: boolean
   handleOnClick?: (user: UserT) => void
 }
 
 const User = (props: Props) => {
-  const { id, name, avatarUrl, handleOnClick } = props
+  const { id, name, avatarUrl, onlyImage, handleOnClick } = props
   const initials = name
     ?.split(' ')
     .map((word) => word[0])
@@ -34,7 +35,7 @@ const User = (props: Props) => {
       ) : (
         <span className={styles.initials}>{initials}</span>
       )}
-      {name}
+      {!onlyImage && name}
     </div>
   )
 }

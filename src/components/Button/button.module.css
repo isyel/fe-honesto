@@ -11,6 +11,13 @@
   transition: var(--animDuration) var(--animEase);
 }
 
+@media screen and (max-width: 768px) {
+  .button {
+    padding: 8px 25px;
+    font-size: var(--fs-sm);
+  }
+}
+
 .button:hover {
   background-color: var(--copyLightColor);
   border-color: var(--primaryColor);

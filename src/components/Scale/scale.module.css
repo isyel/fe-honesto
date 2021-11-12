@@ -21,6 +21,12 @@
   padding: 0.6em 1em;
 }
 
+@media screen and (max-width: 768px) {
+  .scaleHeight {
+    height: 30px;
+  }
+}
+
 .hovered {
   background-color: var(--primaryMediumColor);
 }

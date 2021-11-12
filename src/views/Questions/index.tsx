@@ -128,7 +128,11 @@ const Questions = () => {
               {questions && <h2>{questions[currentQuestionIndex].label}</h2>}
               <span>Share your feedback with {user?.name || 'No User'}</span>
             </div>
-            <User avatarUrl={user?.avatarUrl} />
+            <User
+              avatarUrl={user?.avatarUrl}
+              name={user?.name}
+              onlyImage={true}
+            />
           </section>
           {questions.map((question, index) => {
             return (
