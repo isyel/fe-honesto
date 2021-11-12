@@ -92,7 +92,7 @@
   }
 
   .mobileMenu > * {
-    font-size: var(--fs-l);
+    font-size: var(--fs-base);
   }
 
   .mobileMenu a {
