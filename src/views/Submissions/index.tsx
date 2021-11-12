@@ -31,12 +31,15 @@ const Submissions = () => {
   return (
     <MainLayout loggedIn>
       {userReviews && userReviews?.length > 0 ? (
-        <ReviewList
-          userReviews={userReviews}
-          selectedUser={selectedUser}
-          selectedFeedback={selectedFeedback}
-          handleSelectUser={handleSelectUser}
-        />
+        <>
+          <h1>Review Feedback Received</h1>
+          <ReviewList
+            userReviews={userReviews}
+            selectedUser={selectedUser}
+            selectedFeedback={selectedFeedback}
+            handleSelectUser={handleSelectUser}
+          />
+        </>
       ) : (
         <div className={styles.noFeedback}>
           <h1>No Reviews received 😔</h1>

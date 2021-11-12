@@ -19,7 +19,6 @@ const ReviewList = (props: Props) => {
 
   return (
     <>
-      <h1>Review Feedback Received</h1>
       <div className={styles.feedbackContainer}>
         <ul className={styles.users}>
           <li>

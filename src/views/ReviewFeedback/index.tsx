@@ -1,14 +1,12 @@
 import * as React from 'react'
-import FeedbackList from '../../components/FeedbackList'
-import User from '../../components/User'
 import { UserT } from '../../context/types'
 import MainLayout from '../../layouts/MainLayout'
-import classNames from 'classnames'
 import { UserContext } from '../../context/UserProvider'
 import styles from './reviewFeedback.module.css'
 import { FeedbackT, ReviewerContext } from '../../context/ReviewerProvider'
 import { AccountContext } from '../../context/AccountProvider'
 import { getFeedbacks } from '../../common/util'
+import ReviewList from '../../components/ReviewList'
 
 const ReviewFeedback = () => {
   const reviews = React.useContext(ReviewerContext)
@@ -21,11 +19,11 @@ const ReviewFeedback = () => {
   const feedbacks = getFeedbacks(reviews, currentUser)
 
   const userFeedback = feedbacks.find(
-    (feedback) => feedback.user?.id === userId,
+    (feedback) => feedback.reviewer?.id === userId,
   )
 
   const [selectedUser, setSelectedUser] = React.useState<UserT | any>(
-    user || feedbacks[0]?.user,
+    user || feedbacks[0]?.reviewer,
   )
   const [selectedFeedback, setSelectedFeedback] = React.useState<
     FeedbackT | undefined | any
@@ -34,7 +32,7 @@ const ReviewFeedback = () => {
   const handleSelectUser = (user: UserT) => {
     setSelectedUser(user)
     setSelectedFeedback(
-      feedbacks.find((feedback) => feedback.user?.id === user.id),
+      feedbacks.find((feedback) => feedback.reviewer?.id === user.id),
     )
   }
 
@@ -42,37 +40,13 @@ const ReviewFeedback = () => {
     <MainLayout loggedIn>
       {feedbacks?.length > 0 ? (
         <>
-          <h1>Review Feedback Given</h1>
-          <div className={styles.feedbackContainer}>
-            <ul className={styles.users}>
-              <li>
-                <h3>Feedback given</h3>
-              </li>
-              {feedbacks.map((feedback, index) => (
-                <li
-                  className={classNames(
-                    styles.user,
-                    selectedUser?.id === feedback.user?.id && styles.selected,
-                  )}
-                  key={`${Math.random}${index}`}
-                >
-                  <User
-                    id={feedback.user?.id}
-                    name={feedback.user?.name}
-                    avatarUrl={feedback.user?.avatarUrl}
-                    handleOnClick={handleSelectUser}
-                  />
-                </li>
-              ))}
-            </ul>
-
-            <ul className={styles.feedback}>
-              <li>
-                <h2>{selectedUser?.name}'s Feedback</h2>
-              </li>
-              <FeedbackList feedbacks={selectedFeedback?.feedback} />
-            </ul>
-          </div>
+          <h1>Review Feedback Received</h1>
+          <ReviewList
+            userReviews={feedbacks}
+            selectedUser={selectedUser}
+            selectedFeedback={selectedFeedback}
+            handleSelectUser={handleSelectUser}
+          />
         </>
       ) : (
         <div className={styles.noFeedback}>

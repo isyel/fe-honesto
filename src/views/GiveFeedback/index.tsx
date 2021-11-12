@@ -25,7 +25,7 @@ const GiveFeedback = () => {
   }
 
   const isAlreadyReviewed = (userId: string | undefined) => {
-    return feedbacks.some((feedback) => feedback.user?.id === userId)
+    return feedbacks.some((feedback) => feedback.reviewer?.id === userId)
   }
 
   return (

@@ -113,7 +113,7 @@ const Questions = () => {
   const pendingUsers = users?.filter(
     (user) =>
       user.id !== currentUser?.id &&
-      !feedbacks.some((feedback) => feedback.user?.id === user.id),
+      !feedbacks.some((feedback) => feedback.reviewer?.id === user.id),
   )
 
   return (

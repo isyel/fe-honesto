@@ -31,14 +31,13 @@ const Scale = ({
   let scaleLevel = 0
   if (scales && value) scaleLevel = scales / +value
 
-  console.log(
-    'scales: ',
-    scales,
-    '  value: ',
-    value,
-    '---- scaleLevel: ',
-    scaleLevel,
-  )
+  const scalesColor = !noAction
+    ? styles.selected
+    : scaleLevel > 2
+    ? styles.selectedDanger
+    : scaleLevel <= 1
+    ? styles.selectedSuccess
+    : styles.selectedWarning
 
   return (
     <Tooltip
@@ -55,14 +54,7 @@ const Scale = ({
               key={`${Math.random}${index}`}
               className={classNames(
                 styles.scale,
-                value > index &&
-                  (!noAction
-                    ? styles.selected
-                    : scaleLevel > 2
-                    ? styles.selectedDanger
-                    : scaleLevel <= 1
-                    ? styles.selectedSuccess
-                    : styles.selectedWarning),
+                value > index && scalesColor,
                 scaleHovered >= index && !noAction && styles.hovered,
                 !noAction ? styles.scaleHeight : styles.padding,
               )}
