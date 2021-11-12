@@ -44,50 +44,169 @@ Feel free to also implement any the following task if you are just getting warme
 - [ ] Write some tests (jest, cypress, react testing library, etc)
 - [ ] Add documentation about your tasks to help other developers understand decisions you made
 
-## _Solution Process_
+# _Solution Process_
 
-- Analysed the data from Rick and Morty character API endpoints, to understand the structure of the data
-- Built out the redux structure for the various states to be managed, corresponding actions and reducers
-- Linked the redux action calls with the API fetch functions by use of thunk middleware
-- Managed query string generation using saved state for query parameters
-- Manage API loading, and error response using redux actions and state (show loading and error status on UI)
-- No external Icon Library used, to keep app simple (alternatively used, css content icons and SVG icons)
+- Analysed the existing code structure and the mock data available
+- Mapped out the structure of data to be saved in context for feedbacks submitted
+- Defined the types and state structure for the reviews given `ReviewerProvider.tsx`
+- Added Questions (For giving reviews) and Reviews Page (to see reviews received)
+- Populated feedbacks given and reviews received page with appropriate data
+- Manage no data availability
+- Redesign 404 page to match mockup
+- Added dark theme color scheme and toggle functionality (persist on reloads using Localstorage)
+- Added responsiveness to cover most screen sizes
 
-### **Home Page (Characters List)**
+### **GiveFeedback Page (Users List)**
 
-- Built out components like Character, CharacterList, Sidebar etc.
-- Built out the Pagination component to manage page navigation, managing page number state with redux (page number needed to be used for query parameters as well)
-- Built out SideBar component with input box for search and select input for gender and status, use custom useDebounce hook in calling redux action for filter API calls
-- Built the Header component to house Logo and mobile navigation
+- Updated existing component
+- Filter out current user data from list
+- Switch button to `View Submission` if submission submitted by current user
+- Send query string in url for individual submissions view (to highlight the specific user click on in My Feedback Page)
 
-### **Single Character Page**
+### **My Feedback Page**
 
-- Load character details from the saved characters list in Redux if data exists, if not call API to fetch character data (to reduce uneccessary API call)
-- Generate the Episode tabs(limit to 5 using array slice), use string functions to get Episode number from links Array
-- Load Episode data for each Tab change
+- Load data from context to populate page
+- Perform filter for currentUser and mapping for feedback type to populate data
+- Check for query string value to switch selected user if visited from `View Submission` link
+- Defaults to user at index[0] if no query string passed on page load
+- Find feedback of currently selected user
+- Populate data to `ReviewsList` component (reused in My Reviews page)
 
-### **Managing State Data**
+### **My Reviews Page**
 
-I used REDUX to manage state data across the application, having store slices for characters, episode, pages/query parameters and api loading state
+- Load data from context to populate page
+- Perform filter for currentUser
+- Defaults to user at index[0] on Page load
+- Find feedback of currently selected user
+- Populate data to `ReviewsList` component
 
-Used Redux Thunk middleware to manage API endpoints loading, response and error
+### **Questions Page**
 
-**Characters List Page**
-Use browser disk cache for API requests and reponses (using the default header: cache-control: max-age=259200)
+- Load questions from context
+- Load questions data based on currentQuestion index
+- Skip question updates answer with `skipped: true` flag
+- Keep state of answers so user can go to previous question and update answer
+- Disable `Next` button until answer is given for current question
+- Submit all answers when it is last question
+- Use `Scale` component for scale type questions
 
-### **Pages**
+### **Important Components**
 
-**Characters List Page**
+**Reviews List Component**
 
-- Grid view of characters per page
-- Link to individual character page (Page routing is achieved using `react-router-dom`)
-- Side bar with filters for name, gender and status
+- Receives `userReviews`, `selectedUser`, `selectedFeedback`, `handleSelectUser` props to populate data and switch between users
+- Map over usersReviews to populate users data
+- Defaults to feedback at index[0] on first load
 
-**Single Character Page**
+**Scale Component**
 
-- Character details and Image
-- Episode tabs and episode details
+- Receives `scales`, `value` props and optional like `noAction`, `toolTipText` and `handleAddChangeAnswer` to cover for preview component state
+- Populate number of boxes based on `scales` value use `[...Array(scales)].map`
+- Shows scale based on index against value
+- When used for Questions page use primary color for selected
+- When used in reviews preview, add dynamic(warning, success and danger) color based on `value` against `scale` value
+- Show tooltip when in preview and question type is `multiplechoice`
+- Tooltip shows the text of the selected scale value, to help viewer understand what the given scale means
 
-### _Suggestions on API_
+### **Strucure of ReviewContext State**
 
-The episodes array were only links to API and the episode numbers were not part of the array elements, it required me to perform some string functions on the Url while generating Episode `Tabs` to get the episode numbers
+Using ReviewContext as the single source of truth so as to persist data across logins and logouts
+
+_Sample Context Data_
+
+```
+[
+    {
+        "user": {
+            "avatarUrl": "https://i.pravatar.cc/150?img=68",
+            "id": "p0",
+            "name": "John Smith"
+        },
+        "reviews": [
+            {
+                "reviewer": {
+                    "avatarUrl": "https://i.pravatar.cc/150?img=48",
+                    "id": "p1",
+                    "name": "Martha Liberty"
+                },
+                "feedbacks": [
+                    {
+                        "question": {
+                            "id": "q1",
+                            "type": "scale",
+                            "required": true,
+                            "label": "How much do you trust this person to deliver high quality work?"
+                        },
+                        "feedback": 6,
+                        "skipped": false
+                    },
+                    {
+                        "question": {
+                            "id": "q2",
+                            "type": "multipleChoice",
+                            "required": true,
+                            "label": "Is this person up to date with the latest accounting regulations?",
+                            "options": [
+                                {
+                                    "value": 1,
+                                    "label": "Not fully. You should work on trying to stay more up to date with regulations"
+                                },
+                                {
+                                    "value": 2,
+                                    "label": "Yes, you are reasonably up to date with new regulations."
+                                },
+                                {
+                                    "value": 3,
+                                    "label": "Yes, you are the one I look up to when I need information about new regulations"
+                                }
+                            ]
+                        },
+                        "feedback": 3,
+                        "skipped": false
+                    },
+                    {
+                        "question": {
+                            "id": "q3",
+                            "type": "scale",
+                            "required": true,
+                            "label": "How well does this person understand the technical domain of our product?"
+                        },
+                        "feedback": 7,
+                        "skipped": false
+                    },
+                    {
+                        "question": {
+                            "id": "q4",
+                            "type": "text",
+                            "required": false,
+                            "label": "Have there been any situations where this person could have managed their emotions better? What happened?"
+                        },
+                        "feedback": "cwcee",
+                        "skipped": false
+                    },
+                    ...
+                ]
+            }
+        ]
+    }
+    ...
+]
+```
+
+### **Bonus Tasks Completed**
+
+- Create dark theme ✅
+- Add responsiveness ✅
+- Add reviews received page✅
+
+### **Improvements to make**
+
+- Update an already given feedback to a user
+- Add tests (jest/React Testing Library)
+- Enforce strong typechecks on all variables and objects
+- Add async data management and add timeouts to simulate server delay (the skeleton loader wasn’t of any use, since the data was local and there was no delay in fetching) or link to an external API
+
+### **Challenges**
+
+- Types Management (had to refactor some type eg: merged QuestionT and Question2T into single QuestionT)
+- Some Css styles were applied strictly, making it harder to add responsiveness
