@@ -56,7 +56,10 @@ const Header = ({ handleThemeChange, darkTheme }: Props) => {
         )}
         <span className={styles.spacer} />
         <NavLink exact to="/" onClick={handleLogout} className={styles.logout}>
-          Logout {currentUser && `${currentUser.name}`}
+          Logout{' '}
+          <span className={styles.logoutName}>
+            {currentUser && `${currentUser.name}`}
+          </span>
         </NavLink>
       </div>
       {showMenu && (

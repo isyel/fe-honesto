@@ -54,6 +54,10 @@
   align-items: stretch;
 }
 
+.logoutName {
+  padding-left: var(--space);
+}
+
 @media screen and (max-width: 500px) {
   .header {
     justify-content: space-between;
@@ -97,5 +101,9 @@
 
   .mobileMenu a {
     padding-bottom: var(--space);
+  }
+
+  .logoutName {
+    display: none;
   }
 }

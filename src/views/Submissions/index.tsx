@@ -32,7 +32,7 @@ const Submissions = () => {
     <MainLayout loggedIn>
       {userReviews && userReviews?.length > 0 ? (
         <>
-          <h1>Review Feedback Received</h1>
+          <h1 className={styles.title}>Review Feedback Received</h1>
           <ReviewList
             userReviews={userReviews}
             selectedUser={selectedUser}
